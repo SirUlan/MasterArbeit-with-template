@@ -1,0 +1,105 @@
+\section{Scintillation spectrum}
+ The three variables for the parametrization of the scintillation were introduced at section REF!. In the scope of dark rates, only the amount of measured photons and its time distribution are needed. As the measurements are done with the same PMT model that will be used in the mDOM, one could waive determining the emission spectrum and work with a relative yield. However, as it was shown in section REF!, the scintillation yield and lifetime are interdependent parameters. Thus, for a correct description of the time distribution (lifetime) the absolute yield is needed, making the determination of the emission spectrum mandatory.\par
+This section provides a description of the measurement of the scintillation spectrum for the different materials. 
+First, the acquisition of the "raw" spectra is presented and explained. These results are afterwards corrected, compensating various influencing factors of the experimental method, as the wavelength dependence of the QE of the PMT and the transmittance of the samples. Both properties are therefore measured and discussed.\\ 
+In the end, the spectra are implemented in the Geant4 simulation and validated.
+
+
+\subsection{Raw light emission}
+\begin{wrapfigure}{R}{0.5\textwidth}
+\centering
+\includegraphics[width=0.5\textwidth]{Figures/spectrum/alpha049}
+\caption{PMT output current as a function of the selected wavelength, once for the  Am-241 source alone and once where a Vitrovex sample was excited. For comparison is a reference spectrum of air scintillation depicted REF!.}
+\vspace{-20pt}
+\label{fig:am241Vitrovex}
+\end{wrapfigure}
+The measurements of the scintillation emission spectra were conducted with the setup seen in figure REF!. A strong radioactive source excites the sample, which then scintillates. The emitted light enters a remote controllable monochromator \footnote{LOT Quantum Design model MSH 300 with a grating model MSG-T-1200-250.}, which breaks the scintillation down to a narrow wavelength segment (down to $\SI{2.5}{nm}$, depending on the exit slit aperture \cite{LQMSH300}). This "monochromatic" light is fed inside a black box onto the centre of a PMT. The latter is driven in current mode, measuring the output with a picoammeter \footnote{Keithley model 487.}.\par
+For this measurement, it is indispensable that the samples emit with vast intensity. The light is being broken apart in different wavelengths segments through scattering.  Also, the photon loss due to the monochromator entrance slit and to the PMT QE is high. Hence, only a small fraction of the emitted light will be measured at a time. This makes necessary the use of a strong radioactive source. \par 
+The first measurements were done with an Am-241 alpha source, which had an approximate activity of $\sim \SI{370}{kBq}$. With this source one generates an energy deposition in the material of $\sim \SI{1}{TeV\cdot s^{-1}}$ \footnote{Assuming $4\pi$ emission from the radioactive source.}.
+However, the yielded signal to noise ratio is low and a distinct spectrum appears only after averaging several measurements. Thus, the current was measured in $\SI{5}{nm}$ steps between $200$-$\SI{800}{nm}$ output wavelength 285 times. 
+The average current emission of the Vitrovex glass sample is depicted in figure \ref{fig:am241Vitrovex}. The emission has a maximum at $\sim\SI{350}{nm}$ and its tail extends until around $\sim\SI{500}{nm}$. However, the intensity of this peak is only five times higher than the background. This means that it is possible that the scintillation spectrum is not completely depicted in the results, where low-intensity zones could be being suppressed by the noise. One could increase the measuring time, but the results will be still constrained by the dark current of the PMT, wich lies in the range of $1$-$\SI{3}{pA}$. Another and more important problem for the evaluation of the spectrum is the fact that the source emits light by itself. In figure \ref{fig:am241Vitrovex} the results measuring without excitation of any sample is shown. This is very similar to the results with the Vitrovex sample, but slightly shifted towards the UV region. This light could be coming directly from the source, as it is enclosed partially in plastic, but most probable is that the air is scintillating. Alpha particles have a range of $\sim \SI{4}{cm}$ REF! in air and therefore all the energy will be deposited before entering the monochromator. The similarity between the measured and a reference of air scintillation spectrum (see figure \ref{fig:am241Vitrovex}) is remarkable, making this hypothesis more plausible. This would not represent a problem for the measurement with the samples, as they are placed directly on the sources and consequently only a small fraction of the particle energy will be deposited in the air. But the possibility of the  scintillation of the source itself can not be discarded without BLAH BLAH.\par
+\begin{wrapfigure}{L}{0.5\textwidth}
+\centering
+\includegraphics[width=0.5\textwidth]{Figures/spectrum/Sr90beta049}
+\caption{PMT output current as a function of the selected wavelength, once for the Sr-90 source alone and once where a Vitrovex sample was excited.}
+\label{fig:Sr90Vitrovex}
+\end{wrapfigure}
+Because of the constraints that are presented by the measurement with the Am-241 source, another measurement with a Sr-90 of $\sim \SI{0.3}{GBq}$ was done. Sr-90 is a beta source with a mean energy of $\SI{195.8}{keV}$ and decays into Y-90. The latter also undergoes beta decay with a mean energy of $\SI{933.7}{keV}$ REF! . As the half-life of the yttrium isotope ($\SI{64}{h}$ REF!) is much lower than the one of its mother nucleus ($\SI{28.8}{y}$ REF!), they are in secular equilibrium. With both isotopes, the yielded energy deposition in the sample lies around $\sim \SI{80}{TeV\cdot s^{-1}}$. A beta source has the advantage, that it has a range in the air between $1$ to $\SI{8}{m}$ REF! depending on its energy. This reduces the probability of detecting light coming from air luminescence. Thus, this also means that the sample has to be thicker, for the energy to be totally absorbed in the material. The thicker the sample is, the more photons will be absorbed in the material, losing sensitivity of the spectrum, especially in the UV region (see section REF!). \par
+The results obtained with the strontium source exciting a Vitrovex sample are shown in figure \ref{fig:Sr90Vitrovex}. Here, the measured spectrum has the maximum at the same location as in the last case with Am-241, but its tail reaches the $\SI{600}{nm}$. The approached signal to noise ratio is much better, and long measurements are not necessary. In this case, the source also scintillated, but its intensity is much lower than the sample's scintillation and it does not seem to be coming from air luminescence.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.\textwidth]{Figures/spectrum/Pictures.pdf}
+    \caption{Long exposure ($\SI{15}{min}$) photos from the glass and gel samples scintillating (left, center), as well from the source itself (right).}
+    \label{fig:pcitures}
+\end{figure}
+
+\begin{wrapfigure}{R}{0.55\textwidth}
+\centering
+\includegraphics[width=0.55\textwidth]{Figures/spectrum/background-wrap055}
+\caption{Flower two.}
+\label{fig:backgroundComparison}
+\end{wrapfigure}
+\par To find the origin of the background light from the source, long exposure pictures were taken with a DSLR camera from each glass and gel sample scintillating, as well from the source itself \footnote{Nikon D5500 with AF-S 18-55 VR lense}. The photos are depicted in figure \ref{fig:pcitures}. Apart from the scintillation itself, small yellow spots can be seen. Comparing the photo from the source (see figrue \ref{fig:pcitures} top right) with the long exposure picture (see figrue \ref{fig:pcitures} bottom right), one can see that the light is coming from inside the source. The Sr-90 is encapsulated in glass and a very thin layer of steel \footnote{For a detailed view of the source, see Appendix REF!.}.  The light may be produced by scintillation of the glass capsule and then escapes the steel layer, which seems to be worn-out in some areas. Blocking this light is not trivial. The photons get through thin paper easily and thick materials would reduce the electron flux coming from the source. Also, the choice of the right material is very important, as plastics or white paper scintillate when excited increasing the overall background. The best compromise was found with a sheet from $\sim\SI{1}{mm}$ Neoprene enclosed in black paper. The photons coming from the source could not be completely blocked in this configuration though, as it can be seen in \ref{fig:backgroundComparison}. A discussion about the influence of this background on the measured spectra is made at the end of this section.
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{Figures/spectrum/vitrovex_entry}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{Figures/spectrum/vitrovex_exit}
+  \end{minipage}
+  \caption{Caca}
+  \label{fig:slitsAperture}
+\end{figure}
+
+\par Before making the final measurements for each sample, the right slit aperture must be found for both, the entrance and exit slit of the monochromator. These slits play a major role in the performance of the monochromator, determining the instrumental bandwidth and the intensity of the output. As one is measuring a very low light intensity source, the slits should be as open as possible. However, the optical resolution worsens with wider slits. Therefore, it has to be verified if the measured spectra have discrete constituents that need a high resolution. Hence, the spectrum of each sample was measured with different entrance $a_{\rm{en}}$ and exit slit apertures $a_{\rm{ex}}$. The results of the Vitrovex sample can be seen in figure \ref{fig:slitsAperture}. Here, the spectra are normalised with their total area in order to be able to compare their shape. There is no noticeable difference between the different spectra, and it can be concluded that the scintillation spectrum does not have narrow components. Therefore the final and longer measurement is done with the maximal slit aperture of $a_{\rm{en}}= a_{\rm{ex}}= \SI{10}{mm}$, which yields more precise results. This is also the case for the other three materials (the results at different slits apertures can be found in Appendix REF!). 
+\par blahblah final measurements. background discussion
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Figures/spectrum/allSpec}
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
+
+\subsection{Correction factors}
+
+As already stated, the shape of the measured spectra is distorted by different factors from the experimental setup. These have to be measured and 
+\subsubsection{Quantum efficiency from the measuring PMT}
+
+
+
+
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{Figures/spectrum/CurrentPMTQE05}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{Figures/spectrum/QEPHD05}
+  \end{minipage}
+  \caption{\textbf{Left:} Current measured with the photodiode and the photomultiplier from the Xenon lamp against the selected wavelength. The statisticals errors are smaller than the linewidth. \textbf{Right:} Quantum efficiency of the calibrated photodiode.}
+\end{figure}
+
+
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/spectrum/QE08}
+    \caption{Measured quantum efficiency in dependence of the wavelength.}
+    \label{fig:my_label}
+\end{figure}
+
+
+
+\subsubsection{Transmittance from the samples}
+
+
+\subsubsection{Efficiency of the monochromator grating}
+
+
+
