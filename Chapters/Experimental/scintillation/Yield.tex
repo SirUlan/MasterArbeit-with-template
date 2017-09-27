@@ -1,0 +1,50 @@
+\chapter{Scintillation Yield}
+
+\section{Measuring PMT rates}
+
+\subsection{Rates correction}
+
+\begin{wraptable}{O}{5.cm}
+\centering
+\caption{Coefficients of the quintic fit function.}
+\label{tab:quinticCoeff}
+\begin{tabular}{@{}ll@{}}
+\toprule
+$a_0$ & $\SI{-0.08\pm0.5}{s^{-1}}$               \\
+$a_1$ & $1.0026\pm0.0010$                        \\
+$a_2$ & $\SI{7.3\pm0.7}{\cdot 10^{-6}\,s}$       \\
+$a_3$ & $\SI{-0.8\pm1.7}{\cdot 10^{-10}\,s^{2}}$ \\
+$a_4$ & $\SI{-1.8\pm2.1}{\cdot 10^{-14}\,s^{3}}$ \\
+$a_5$ & $\SI{-8.1\pm8.8}{\cdot 10^{-19}\,s^{4}}$ \\ \bottomrule
+\end{tabular}
+\end{wraptable} 
+For estimating the error of the rate measurement described above and its correction, a pulse generator \footnote{RIGOL model DG1032Z} was connected to the oscilloscope producing pulses with random frequencies between $0$ and $\SI{10}{kHz}$. The accuracy of this generator is high, with an uncertainty of $\SI{\pm 1}{ppm}$ of the setting frequency value \cite{RIGOL}. These pulses where measured with the same code used for the PMT rates measurement, meaning that the number of captions is set in such a way, that the measurement time per data point is $\SI{2}{s}$ to $\SI{3}{s}$. Figure \ref{fig:correctionDarkrates} shows the results of this measurement. It can be seen, that as expected the measured rates are smaller than the set frequency, specially at higher rates. This can be partially explained by the increase of the delay with the number of captions. 
+\par The data shows an almost linear relationship, but it was fitted with polynomials of different numbers of degrees. The best result was achieved with a fifth degree polynomial 
+\begin{equation}
+    f(x) = \sum^{5}_{i=0}a_i \cdot x^{i},
+\end{equation}
+with the coefficients $a_i$ in table \ref{tab:quinticCoeff}. Correcting the measurement with this function produces a maximal relative error of about $\SI{0.3}{\%}$, as seen at the fit residuals in figure \ref{fig:correctionDarkrates}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1.0]{Figures/yield/correctedDarkRates085.pdf}
+    \caption{Measured quantum efficiency in dependence of the wavelength.}
+    \label{fig:correctionDarkrates}
+\end{figure}
+
+\subsection{Death time between captures}
+\begin{figure}[H]
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[scale = 1.0]{Figures/yield/dTvCaptures05.pdf}
+  \captionof{figure}{A figure}
+  \label{fig:test1}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[scale = 1.0]{Figures/yield/distribution05.pdf}
+  \captionof{figure}{Another figure}
+  \label{fig:test2}
+\end{minipage}
+\end{figure}
+

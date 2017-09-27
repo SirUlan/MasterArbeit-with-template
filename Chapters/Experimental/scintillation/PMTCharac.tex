@@ -1,0 +1,120 @@
+\chapter{Characterization of the PMT}
+
+In order to rightfully simulate and calculate the scintillation properties, it is necessary to fully know the response of the detection system. In this chapter the quantum efficiency, gain, TTS and dark rates of the PMT used in the experiments of this work are presented. 
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/PMTChar/Gain_setup08.pdf}
+    \caption{Background measurement of the detection system in the University of Alberta and the University of Münster.}
+    \label{fig:gainsetup}
+\end{figure}
+
+The setup for the gain and TTS measurement can be seen in figure \ref{fig:gainsetup}. The photomultiplier is positioned in a light-tight box and illuminated by a pulsed LED\footnote{Marca}, which is triggered by a pulse generator\footnote{marca}. The latter also triggers the oscilloscope\footnote{marca}, guaranteeing that the measured signal is produced by a photon from the LED and it is not a dark rate event. The light of the diode is fed into the dark box by means of an optical fibre, which is terminated by a diffuser, achieving a homogeneous illumination onto the photocathode. The dark box is placed in the climate chamber for temperature regulation. The PMT voltage trough out this measurements was $\SI{996\pm1}{V}$, which is the maximum for the first coarse of the high voltage supplier used. This way the same voltage for all measurements can be set.
+\par The signal of the PMT gets digitised by the oscilloscope and processed online in a computer with a Python code, saving the charge, amplitude and time of the main pulse. With this data, the gain, TTS and the amplitude to charge calibration can be done.
+\section{Gain}
+\begin{figure}[H]
+\centering
+   \begin{subfigure}[b]{\textwidth}
+   \centering
+   \includegraphics[scale=1.0]{Figures/PMTChar/SPE-Noamp-085.pdf}
+\end{subfigure}
+\begin{subfigure}[b]{\textwidth}
+\centering
+\vspace*{-15pt}
+   \includegraphics[scale=1.0]{Figures/PMTChar/SPE-amp-085.pdf}
+\end{subfigure}
+\caption{}
+\end{figure}
+
+
+
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1.0]{Figures/PMTChar/Gain-05.pdf}
+    \caption{Background measurement of the detection system in the University of Alberta and the University of Münster.}
+    \label{fig:backgroundgamma}
+\end{figure}
+
+
+
+
+\subsection{Photon loss due to trigger}
+
+\begin{figure}[H]
+    \centering
+    \begin{flushleft}
+    \hspace*{44pt}
+    \includegraphics[scale=1.0]{Figures/PMTChar/triggerCharge-08.pdf} 
+    \end{flushleft}
+    \includegraphics[scale=1.0]{Figures/PMTChar/TriggerSearch-08.pdf}
+    \caption{Background measurement of the detection system in the University of Alberta and the University of Münster.}
+    \label{fig:backgroundgamma}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1.0]{Figures/PMTChar/ampToCharge-08.pdf}
+    \caption{Background measurement of the detection system in the University of Alberta and the University of Münster.}
+    \label{fig:backgroundgamma}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[scale = 1.0]{Figures/PMTChar/lossVStrigger05.pdf}
+  \captionof{figure}{A figure}
+  \label{fig:test1}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[scale = 1.0]{Figures/PMTChar/lossVSTemp05.pdf}
+  \captionof{figure}{Another figure}
+  \label{fig:test2}
+\end{minipage}
+\end{figure}
+
+\section{Transit time spread}
+\begin{figure}[H]
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[scale = 1.0]{Figures/PMTChar/TTSexample05.pdf}
+  \captionof{figure}{A figure}
+  \label{fig:test1}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[scale = 1.0]{Figures/PMTChar/TTS-05.pdf}
+  \captionof{figure}{Another figure}
+  \label{fig:test2}
+\end{minipage}
+\end{figure}
+
+
+
+\section{Quantum efficiency}
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{Figures/PMTChar/CurrentPMTQE05}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{Figures/PMTChar/QEPHD05}
+  \end{minipage}
+  \caption{\textbf{Left:} Current measured with the photodiode and the photomultiplier from the Xenon lamp against the selected wavelength. The statisticals errors are smaller than the linewidth. \textbf{Right:} Quantum efficiency of the calibrated photodiode.}
+\end{figure}
+
+
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/PMTChar/QE08}
+    \caption{Measured quantum efficiency in dependence of the wavelength.}
+    \label{fig:my_label}
+\end{figure}
