@@ -1,0 +1,34 @@
+\chapter{Neutrino astronomy}
+
+
+\section{Neutrino properties and interactions}
+Neutrinos are elementary particles included in the lepton family and thus an integral part of the Standard Model of particle physics. They are quasi-massless, do not possess electrical charge and, being leptons, do not undergo strong interaction. Henceforth, neutrinos can only interact through the weak force. 
+\par These particles come in three flavours, electron, muon and tau neutrinos, corresponding to the three charged leptons. A variety of experiments in the last decades have proven that the neutrino lepton flavour are not conserved. A neutrino flux of a given flavour change part of the initial flavour after propagation in vacuum or matter. This process is often referred to as neutrino oscillation. The only consistent justification for this property until now is a nonzero neutrino mass, opposed as initially believed.
+\par The neutrino properties make their direct detection impossible and it has to be carried out via charged secondary particles produced in interactions. At high energies (>$\SI{10}{GeV}$), these interaction are dominated by deep inelastic scattering with nucleons. Depending on the exchanged boson in the interaction, there are two branches in which neutrinos will engage, the neutral current (exchange of a $Z^{0}$) or the charged current (exchange of a $W^{\pm}$):
+\begin{equation}
+\label{eq:interactions}
+    \nu_l+N \xrightarrow{Z^{0}} \nu_l+X,\hspace{1cm} \nu_l+N \xrightarrow{W^{\pm}} l+X,
+\end{equation}
+where $\nu_l$ represent a neutrino (or antineutrino) with the lepton flavour $l$, $N$ denotes the nucleon (proton or neutron), $l$ the emitted lepton (or antilepton) and $X$ represents the rest products of the interaction, which can be one or more hadronic particles or cascades. In equation \ref{eq:interactions} the lepton flavour is strictly conserved, which may seem conflicting with the already mentioned neutrino oscillation. It has to be emphasised that the flavour change is a consequence of the flavor mixture of mass eigenstates after propagation. The violation of lepton flavor number in an interaction implies a CPT symmetry breaking \cite{D_az_2016}, a violation that at this time has not being confirmed by experiments \cite{hep-ph/0611177}.
+
+\section{Indirect detection of neutrinos}
+\begin{wrapfigure}{O}{0.4\textwidth}
+\centering
+\begin{flushleft}
+\includegraphics[width=0.4\textwidth]{Figures/theory/Cherenkov80.pdf}
+\end{flushleft}
+\caption{}
+\label{fig:CherenkovProcess}
+\end{wrapfigure}
+As we already saw, neutrinos can not be measured directly. The charged secondary particles emitted in interactions such as the ones of equation \ref{eq:interactions} can however be detected by different techniques. Depending on the energy range and issue of study radiochemical (as the GALLEX/GNO and SAGE experiments \cite{xing2011neutrinos}), tracking calorimeters (MINOS, NO$\nu$A \cite{Backhouse_2015}), radio detectors (ANITA, RICE, ARA \cite{ANITA,RICE,Meures_2015}), among others methods have been used. However, the most widespread technique is detection by Cherenkov effect, which is used e.g., for the detection of high-energy neutrinos in large volume neutrino telescopes such ANTARES, BDUNT, NESTOR and IceCube. This effect will be explained in the next section.
+\subsection{Cherenkov radiation}
+\label{sec:Cherenkov}
+The Cherenkov effect takes places when a charged particle passes through a dielectric at speeds greater than the phase velocity of light in that medium. Here, the electric field of the particle polarises the medium (small displacements by a very large number of electrons). Upon the de-excitation of the electrons (return to their normal position), radiation is emitted. If the charged particle is slower than the phase velocity of this radiation, this emission interferes destructively. If this is not the case, i.e. it is faster than light in the medium, the wavelets of the track are in phase overlapping constructively on a wavefront, causing the coherent emission of photons \cite{Jelley_1955}. A sketch of this process is shown in figure \ref{fig:CherenkovProcess}. The Cherenkov radiation is released in form of a cone with an opening angle $\theta$ relative to the particle's trajectory.  This angle is defined by the velocity of the wavefronts $v_w = \dfrac{c}{n}$, which depends on the refraction index of the medium $n$, and the velocity of the charged particle $v_p = \beta \cdot c$, where $\beta$ is the ratio of $v_p$ to the speed of light $c$. Following figure \ref{fig:CherenkovProcess} it is given by:
+\begin{equation}
+\cos(\theta) = \dfrac{c\cdot t \cdot n^{-1}}{\beta \cdot c \cdot t} = \dfrac{1}{\beta \cdot n}.
+\end{equation}
+Given the condition $\beta > n^{-1}$ we can directly determine the minimal energy $E_0$ of a particle for the production of Cherenkov light:
+\begin{equation}
+    E = \gamma m_{0} c^2 = \dfrac{m_{0} c^2}{\sqrt{1-\beta^2}} > E_0 = \dfrac{m_{0}c^2}{\sqrt{1-n^{-2}}} =  m_{0}c^2\sqrt{\dfrac{n^2}{n^2-1}},
+\end{equation}
+where $m_0$ is the invariant mass of the particle and $\gamma = \dfrac{1}{\sqrt{1-\beta^2}}$ the Lorentz factor.

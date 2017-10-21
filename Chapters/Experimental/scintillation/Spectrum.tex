@@ -1,129 +1,123 @@
 \chapter{Scintillation spectrum}
- The three variables for the parametrization of the scintillation were introduced at section REF!. In the scope of dark rates, only the amount of emitted photons and its time distribution are needed. As the measurements are done with the same PMT type that will be used in the mDOM, one could waive determining the emission spectrum and work with a relative yield. However, as it was shown in section REF!, the scintillation yield and lifetime are interdependent parameters. Thus, for a correct description of the time distribution (lifetime) the absolute yield is needed, making the determination of the emission spectrum mandatory.
- \par This section provides a description of the measurement of the scintillation spectrum for the different materials. 
+ The three variables for the parametrization of the scintillation were introduced at section REF!. blahblah
+ \par This section presents the results of the measurement of the scintillation spectrum for the different materials. 
 First, the acquisition of the spectra is presented and explained. These results are afterwards corrected, compensating various influencing factors of the experimental method, as the wavelength dependence of the QE of the PMT and the transmittance of the samples. 
 
 
 \section{Raw scintillation spectra}
+\label{sec:ITSFUCKINGRAW}
 \begin{wrapfigure}{O}{0.4\textwidth}
 \centering
 \includegraphics[width=0.4\textwidth]{Figures/spectrum/monochromator_45}
-\caption{default}
+\caption{Schematic of the scintillation spectrum measurement setup. The sample and the PMT are placed directly in front of the entrance and exit slit respectively.}
 \label{fig:expSpec}
 \end{wrapfigure}
-The measurements of the scintillation spectra were conducted with the setup seen in figure \ref{fig:expSpec}. A radioactive source excites the sample to scintillation. The emitted light goes then through the entrance slit of a remote controllable monochromator\footnote{LOT Quantum Design model MSH 300 with a grating model MSG-T-1200-250.}, which breaks the scintillation down to a narrow wavelength segment. Right in front of the exit slit of the monochromator sits a small PMT, which measures the output light in current mode. The PMT is a Hamamatsu R7600U-200, which has a flat photocathode that can be placed in such a way that almost all the light emitted by the monochromator is measured. Its photocathode material is ultra bialkali, which exhibits a much higher QE in comparison to the normal bialkali of the Hamamatsu R12199. The PMT signal is measured with a picoammeter\footnote{Keithley model 487.}.
-\par For this measurement, it is indispensable that the samples emit with vast intensity, since only a small fraction of the emitted light is measured at a time. This makes necessary the use of a strong radioactive source. The first measurements were done with an $\ch{^{241}Am}$ alpha source, which had an approximate activity of $\sim \SI{370}{kBq}$. The average energy of the emitted alphas is $\SI{5.479}{MeV}$, producing an energy deposition in the material of $\sim \SI{1}{TeV\cdot s^{-1}}$. Nevertheless, the number of detected photons is low, yielding a rather poor signal to noise ratio. The intensity of the output light is highly dependent on the entrance and exit slit aperture. If the aperture of one of the slits is reduced by the half, the intensity is also halved. Additionally, both slits should have the same aperture, meaning that by reducing the width to the half, the intensity is fourfold smaller. Their aperture also determine the resolution of the monochromator. Figure REF shows this dependency, where the wider the slits are, the broader is the output light. Consequently, one has to make compromise between the signal to noise ratio and the resoulution of the measured spectrum. In this case it was at an aperture of $\SI{2.5}{mm}$, where the resolution of the monochromator is $\SI{7.3 \pm 0.7}{nm}$.
+The measurements of the scintillation spectra were conducted with the setup seen in figure \ref{fig:expSpec}. A radioactive source excites the sample to scintillation. The emitted light goes then through the entrance slit of a remote controllable monochromator\footnote{LOT Quantum Design model MSH 300 with grating model MSG-T-1200-250.}, which breaks the emission down to a narrow wavelength segment. Right after the exit slit of the monochromator sits a small PMT, which measures the output light in current mode. The PMT is a Hamamatsu R7600U-200, which has a flat photocathode that can be placed in such a way that almost all the light emitted by the monochromator is measured. Its photocathode material is ultra bialkali, which exhibits a much higher QE in comparison to the normal bialkali of the Hamamatsu R12199 (see section \ref{sec:QE}) . The PMT signal is measured with a picoammeter\footnote{Keithley model 487.}.
+\par For this measurement, it is indispensable that the samples scintillates intensely, since only a small fraction of the emitted light is measured at a time. This makes necessary the use of a strong radioactive source. The first measurements were done with an $\ch{^{241}Am}$ $\alpha$-source, which had an approximate activity of $\sim \SI{250}{kBq}$. The average energy of the emitted alphas is $\SI{5.479}{MeV}$ \cite{NuclideChart}, producing an energy deposition in the material of $\sim \SI{0.7}{TeV\cdot s^{-1}}$.
+\par The intensity of the output light is highly dependent on the entrance and exit slit aperture. If the aperture of one of the slits is reduced by half, the intensity is also halved. Additionally, both slits should have the same aperture, meaning that by reducing the width to the half, the intensity is fourfold smaller. Their aperture also determine the resolution of the monochromator. Figure \ref{fig:MonoReso} shows this dependency: the wider the slits are, the broader is the output light. Consequently, one has to make a compromise between the signal to noise ratio and the resolution of the spectrum. For the measurement with the $\alpha$-source  the number of detected photons is low, yielding a rather poor signal to noise ratio. Therefore an aperture of $\SI{2.5}{mm}$ was chosen, with which the resolution of the monochromator is $\SI{7.3 \pm 0.7}{nm}$.
 \begin{wrapfigure}{O}{0.5\textwidth}
 \centering
 \includegraphics[width=0.5\textwidth]{Figures/spectrum/resolution05}
 \caption{Resolution of the monochromator output in dependence on the slits apertures. This was calculated measuring the FWHM of emission lines of a Hg lamp.}
-\label{fig:expSpec}
+\label{fig:MonoReso}
 \end{wrapfigure}
-\par The intensity of the PMT current is measured in $\SI{2}{nm}$ for wavelengths between $250$ and $\SI{650}{nm}$. One data point delivered by the picoammeter is the integration of the PMT current for a period of $\SI{16}{ms}$. For one measurement cycle, the average of 100 of this data points is made for each wavelength. Depending on the sample, at least 15 cycles are done and then averaged, until the random noise is flattened. The resulting emission spectra of the samples are depicted in figure \ref{fig:am241Vitrovex}.
+\par For the measurement of the spectra, the intensity of the PMT current is measured in $\SI{2}{nm}$ steps for wavelengths between $250$ and $\SI{650}{nm}$. One data point delivered by the picoammeter is the mean current of the PMT in a period of $\SI{16}{ms}$. For one measurement cycle, the average of 100 of this data points is made for each wavelength. Depending on the sample, at least 15 cycles are done and then averaged, until the random noise is flattened. The resulting emission spectra of the samples are depicted in figure \ref{fig:alluncorrected}. 
+\par It can be seen that for both glass samples, sharp peaks are present in the measured spectra. These peaks lie in the same wavelength (at $\sim\SI{337}{nm}$ and $\sim\SI{358}{nm}$)  suggesting the presence of an external light contamination in the measurements. For these samples the distance to the $\alpha$-source was approximately $\sim \SI{0.5}{mm}$, as the source is protected by a ring of this height. In the case of the Wacker gel almost nothing was measured over the background, only traces of the mentioned peaks. The QSI gel sample was small enough in order to be placed without any gap in between the source and the gel. As the measurement of the latter does not show any light contamination, the peaks are most probably being produced by air-scintillation. So as to confirm this, the $\alpha$-source was measured without any sample in front of it. The results can be seen in figure \ref{fig:airscintillation}. This measurement shows the same and more peaks, which coincide with a reference measurement of air-scintillation done with $\SI{3}{MeV}$ electrons. This discrete emission can be traced back to electronic transitions from molecular nitrogen \cite{AIRFLY}.
+\begin{figure}[]
+    \centering
+    \includegraphics[scale=1.0]{Figures/spectrum/airscintspec_085.pdf}
+    \caption{Measurement of the air scintillation with the source facing no sample (solid line). For comparison, the measured Vitrovex glass spectrum is shown (blue dashed line), where it can be seen the two largest peaks originating from air scintillation. As a reference the measurement of air scintillation with $\SI{3}{MeV}$ electrons is also presented (green dashed line). Data taken from \cite{AIRFLY}.}
+    \label{fig:airscintillation}
+\end{figure}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\newpage
-
- 
-\begin{wrapfigure}{L}{0.5\textwidth}
+\par Owing to the constraints that are presented by the measurement with the $\ch{^{241}Am}$ source, the low signal to noise ratio, reduced resolution and air-scintillation, another measurement with $\ch{^{90}Sr}$ with an activity of $\sim \SI{0.4}{GBq}$ was done. $\ch{^{90}Sr}$ is a beta source with a mean energy of $\SI{195.8\pm0.8}{keV}$ and decays into $\ch{^{90}Y}$ \cite{NuclideChart}. The latter also undergoes beta decay with a mean energy of $\SI{933.7 \pm 1.2}{keV}$ \cite{NuclideChart} . As the half-life of the yttrium isotope ($\SI{64\pm 2}{h}$ \cite{NuclideChart}) is much lower than the one of its mother nucleus ($\SI{28.8 \pm 0.1}{y}$ \cite{NuclideChart}), they are in secular equilibrium. With both isotopes, the yielded energy deposition in the sample is around $\sim \SI{225}{TeV\cdot s^{-1}}$. A beta source has the advantage, that it has a longer range in air than alpha particles. While the latter are completely absorbed after a few centimetres, betas have a range in the order of metres. This reduces the amount of energy released into the air and thus the probability of detecting light coming from it. Accordingly, this also means that the sample has to be thicker for the energy to be totally absorbed in the material. The thicker the sample is, the more photons will be absorbed in the material, losing sensitivity of the spectrum and changing its shape, especially in the UV region (see section REF!).
+\begin{figure}[]
+    \centering
+    \includegraphics[width=\textwidth]{Figures/spectrum/allSpec}
+    \caption{Measured spectra of the four samples irradiated once with an $\ch{^{241}Am}$ $\alpha$- and then with a $\ch{^{90}Sr}$ $\beta$-source. The results with $\ch{^{241}Am}$ yields an inferior signal to noise ratio, as the energy deposition in the samples is far lower than the one achieved with the $\ch{^{90}Sr}$ source.}
+    \label{fig:alluncorrected}
+\end{figure}
+\begin{wrapfigure}{O}{0pt}
 \centering
-\includegraphics[width=0.5\textwidth]{Figures/spectrum/Sr90beta049}
-\caption{PMT output current as a function of the selected wavelength, once for the Sr-90 source alone and once where a Vitrovex sample was excited.}
-\label{fig:Sr90Vitrovex}
+\includegraphics[scale=1.0]{Figures/spectrum/background-Sr90.pdf}
+\caption{Spectrum of the light coming from inside the $\ch{^{90}Sr}$ source.}
+\label{fig:bacgkroundSr90}
 \end{wrapfigure}
-Because of the constraints that are presented by the measurement with the Am-241 source, another measurement with a Sr-90 of $\sim \SI{0.3}{GBq}$ was done. Sr-90 is a beta source with a mean energy of $\SI{195.8}{keV}$ and decays into Y-90. The latter also undergoes beta decay with a mean energy of $\SI{933.7}{keV}$ REF! . As the half-life of the yttrium isotope ($\SI{64}{h}$ REF!) is much lower than the one of its mother nucleus ($\SI{28.8}{y}$ REF!), they are in secular equilibrium. With both isotopes, the yielded energy deposition in the sample lies around $\sim \SI{200}{TeV\cdot s^{-1}}$. A beta source has the advantage, that it has a range in the air between $1$ to $\SI{8}{m}$ REF! depending on its energy. This reduces the probability of detecting light coming from air luminescence. Thus, this also means that the sample has to be thicker, for the energy to be totally absorbed in the material. The thicker the sample is, the more photons will be absorbed in the material, losing sensitivity of the spectrum, especially in the UV region (see section REF!). \par
-The results obtained with the strontium source exciting a Vitrovex sample are shown in figure \ref{fig:Sr90Vitrovex}. Here, the measured spectrum has the maximum at the same location as in the last case with Am-241, but its tail reaches the $\SI{600}{nm}$. The approached signal to noise ratio is much better, and long measurements are not necessary. In this case, the source also scintillated, but its intensity is much lower than the sample's scintillation and it does not seem to be coming from air luminescence.
+
+The light emitted by the samples was strong enough in order to take long exposure pictures with a DSLR camera\footnote{Nikon D5500 with a AF-S 18-55 VR lense}. The photos are depicted in figure \ref{fig:pcitures}. Apart from the scintillation itself, small green spots can be seen. Comparing the photo from the source (see figrue \ref{fig:pcitures} top right) with the long exposure picture (see figrue \ref{fig:pcitures} bottom right), one can see that the light is coming from inside the source. The $\ch{^{90}Sr}$ is encapsulated in glass and a very thin layer of steel \footnote{For a detailed view of the source, see Appendix REF!.}.  The light may be produced by scintillation of the glass capsule and then escapes the steel layer, which seems to be worn-out in some areas. The spectrum of this background is depicted in figure \ref{fig:bacgkroundSr90} and with an intensity of tens of pA it is two orders of magnitude smaller than the scintillation of the samples ($\mathcal{O}(\rm{nA})$). Hence, the influence of this contamination on the spectra is negligible. 
+%Blocking this light would not be trivial. The photons get through thin paper easily and thick materials would reduce the electron flux coming from the source. Also, the choice of the right material would be very important, as plastics or white paper scintillate when excited increasing the overall background. 
+\par The results with the  $\ch{^{90}Sr}$ source can be found in figure \ref{fig:alluncorrected}. It can be seen that for both glass samples the measured spectra are similar to the one obtained with the $\alpha$-source. Though, the UV-cutoff from the spectra of the Vitrovex glass are different. For the  $\ch{^{241}Am}$ source a sample with $\sim\SI{1}{mm}$ thickness was used (range of $\alpha$ is $\mathcal{O}(\rm{\mu m})$ in glass) and for the $\ch{^{90}Sr}$ one of $\sim\SI{1}{cm}$ (range of $\beta$ in the energy spectrum emitted by the source is $<\SI{0.6}{cm}$ in glass). As the absorption length in UV is very small, a wider sample causes a shift in the UV-cutoff to bigger wavelengths. This was not the case for the Benthos glass, as the same sample was used for both measurements. This effect is most noticeable with the QSI gel spectra, as the sample thickness for the $\alpha$-source was very thin ($\sim\SI{0.3}{mm}$) and for the measurement with  $\ch{^{90}Sr}$ it was $\sim\SI{15}{mm}$ absorbing the maximum of the emission and modifying its shape and position. It can also be seen that the spectrum with the $\beta$-source presents a tail at higher wavelengths. This is probably caused by Cherenkov radiation from the sample, as the Cherenkov energy threshold for electrons in glass or gel is around $\sim\SI{200}{keV}$ (see section \ref{sec:Cherenkov}), lower than the energy of most of the emitted electrons. This is not seen with the  $\ch{^{241}Am}$ source, as the threshold for alpha particles is $\sim\SI{1.5}{GeV}$. Cherenkov radiation should also explain the emission shown by the Wacker sample, as nothing was measured with the $\alpha$-source. This will be verified in the next section simulating the Cherenkov emission from the sample.
+\par For the glass samples both sources yield a similar spectrum. However, it is difficult to estimate how much the spectra of the glass samples are being modified by Cherenkov radiation, as the ones measured with the $\ch{^{241}Am}$ source were contaminated with air-scintillation and thus there is no reference to compare with. It can be seen, that specially at the Vitrovex glass spectrum, the intensity is higher at wavelengths between $400$-$\SI{500}{nm}$, which could be a consequence of Cherenkov photons. Air also scintillates in this zone, which could mean that the the glass scintillates only at slower wavelengths. Nevertheless, as this can not be corrected, the spectra measured with $\ch{^{90}Sr}$ will be used hereinafter, as they show a much better signal to noise ratio. For the QSI gel sample, the spectrum with the $\ch{^{241}Am}$ source will be used, as there is a clear loss of information due to sample absorption and contamination from Cherenkov light in the results with the $\ch{^{90}Sr}$ source. The next section presents the correction of these spectra.
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.\textwidth]{Figures/spectrum/Pictures.pdf}
-    \caption{Long exposure ($\SI{15}{min}$) photos from the glass and gel samples scintillating (left, center), as well from the source itself (right).}
+    \caption{Long exposure ($\SI{15}{min}$) photos from the glass and gel samples emitting light (left, center), as well from the source itself (right).}
     \label{fig:pcitures}
 \end{figure}
-
-\begin{wrapfigure}{R}{0.55\textwidth}
-\centering
-\includegraphics[width=0.55\textwidth]{Figures/spectrum/background-wrap055}
-\caption{Flower two.}
-\label{fig:backgroundComparison}
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[scale = 1.0]{Figures/spectrum/QSI-spectracomparison.pdf}
+%    \caption{default}
+%    \label{fig:QSIspectra}
+%\end{figure}
+\section{Correction of the spectra}
+\begin{wrapfigure}{O}{0.4\textwidth}
+\hspace{-30pt} \includegraphics[scale = 1.0]{Figures/spectrum/transmittanceSimulation.pdf}
+\caption{Geometry in the Geant4 simulation of the scintillation transmission.}
+\label{fig:transmissionSimulation}
 \end{wrapfigure}
-\par To find the origin of the background light from the source, long exposure pictures were taken with a DSLR camera from each glass and gel sample scintillating, as well from the source itself \footnote{Nikon D5500 with AF-S 18-55 VR lense}. The photos are depicted in figure \ref{fig:pcitures}. Apart from the scintillation itself, small yellow spots can be seen. Comparing the photo from the source (see figrue \ref{fig:pcitures} top right) with the long exposure picture (see figrue \ref{fig:pcitures} bottom right), one can see that the light is coming from inside the source. The Sr-90 is encapsulated in glass and a very thin layer of steel \footnote{For a detailed view of the source, see Appendix REF!.}.  The light may be produced by scintillation of the glass capsule and then escapes the steel layer, which seems to be worn-out in some areas. Blocking this light is not trivial. The photons get through thin paper easily and thick materials would reduce the electron flux coming from the source. Also, the choice of the right material is very important, as plastics or white paper scintillate when excited increasing the overall background. The best compromise was found with a sheet from $\sim\SI{1}{mm}$ Neoprene enclosed in black paper. The photons coming from the source could not be completely blocked in this configuration though, as it can be seen in \ref{fig:backgroundComparison}. A discussion about the influence of this background on the measured spectra is made at the end of this section.
+There are three components that modify the emitted spectrum. First, the efficiency of the grating inside the monochromator is wavelength dependent. The data provided by the manufacturer is shown in figure \ref{fig:GratingEfficiency}. One can see that there is no cutoff coming from the grating, as its efficiency never falls to $\SI{0}{\percent}$ in the measured wavelength interval, but there is nevertheless a change in the shape of the input and output spectrum, which has to be corrected. 
+\par Then, there is the quantum efficiency of the PMT. This is measured with the same setup as the one explained in section \ref{sec:QE}. The results can be seen in figure \ref{fig:QEsmallPMT}. The data in the UV region is here excluded as well (see explanation in section \ref{sec:QE}).
+\par At last, there is the absorption of the light in the sample. This depends on the absorption length of the material and the distance travelled by the photons inside the sample. In the case of the measurements with $\ch{^{90}Sr}$ source, it is not trivial to calculate it analytically, as the betas scatter in different directions and depths depending on their energy. Also the stopping power of the electrons is energy dependent, and hence the amount of emitted light will vary at different depths of the sample. In order to take all this variables into account, the transmission is calculated with a Geant4 simulation. Figure \ref{fig:transmissionSimulation} shows the simulated geometry. At each event, a decay of $\ch{^{90}Sr}$ and $\ch{^{90}Y}$ is simulated emitting electrons isotropically. The isotopes are placed $\SI{1}{cm}$ in front of the sample and is enclosed with aluminium, imitating the source geometry (see figure \ref{fig:pcitures}). Some of the emitted betas hit the sample, which then scintillate with a flat spectrum between $\SI{200}{nm}$ and $\SI{800}{nm}$. Cherenkov is not included in the simulation, in order to not contaminate the results. The simulated sample has the same thickness as in the measurement (Vitrovex glass $\SI{10.4\pm0.1}{mm}$, Benthos glass $\SI{11.4\pm0.1}{mm}$ and QSI gel $\SI{0.3\pm0.1}{mm}$), and the same data for the absorption length is used, as for the mDOM simulation. A "detector" is placed in a distance of $\SI{10}{cm}$ from the sample, saving the wavelength of all the photons that hit this detector. This is also made for the QSI gel spectrum, but simulating $\ch{^{241}Am}$ isotopes instead of the $\ch{^{90}Sr}$ and $\ch{^{90}Y}$. The relative transmission is then created by displaying the wavelength of the detected photons as a histogram. The normalised relative transmission can be found in figure \ref{fig:allcorrected}.
 \begin{figure}[H]
+\centering\begin{minipage}{.5\textwidth}
   \centering
-  \begin{minipage}[b]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{Figures/spectrum/vitrovex_entry}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[b]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{Figures/spectrum/vitrovex_exit}
-  \end{minipage}
-  \caption{Caca}
-  \label{fig:slitsAperture}
+  \includegraphics[scale = 1.0]{Figures/spectrum/MonochromatorEff.pdf}
+  \captionof{figure}{Grating efficiency for the wavelength interval used in the measurement.}
+  \label{fig:GratingEfficiency}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[scale = 1.0]{Figures/spectrum/QE-smallPMT.pdf}
+  \captionof{figure}{Quantum efficiency of the PMT. The red zone marks the excluded data.}
+  \label{fig:QEsmallPMT}
+\end{minipage}
 \end{figure}
-
-\par Before making the final measurements for each sample, the right slit aperture must be found for both, the entrance and exit slit of the monochromator. These slits play a major role in the performance of the monochromator, determining the instrumental bandwidth and the intensity of the output. As one is measuring a very low light intensity source, the slits should be as open as possible. However, the optical resolution worsens with wider slits. Therefore, it has to be verified if the measured spectra have discrete constituents that need a high resolution. Hence, the spectrum of each sample was measured with different entrance $a_{\rm{en}}$ and exit slit apertures $a_{\rm{ex}}$. The results of the Vitrovex sample can be seen in figure \ref{fig:slitsAperture}. Here, the spectra are normalised with their total area in order to be able to compare their shape. There is no noticeable difference between the different spectra, and it can be concluded that the scintillation spectrum does not have narrow components. Therefore the final and longer measurement is done with the maximal slit aperture of $a_{\rm{en}}= a_{\rm{ex}}= \SI{10}{mm}$, which yields more precise results. This is also the case for the other three materials (the results at different slits apertures can be found in Appendix REF!). 
-\par blahblah final measurements. background discussion
+\par Finnaly, the corrected emitted light intensity $S_c(\lambda)$ at wavelength $\lambda$ can be calculated dividing the measured intensity $S_m(\lambda)$ by the transmission $T(\lambda)$ of the sample, the efficiency of the grating $GE(\lambda)$ and the quantum efficiency $QE(\lambda)$:
+\begin{equation}
+    S_c(\lambda) = \dfrac{S_m(\lambda)}{T(\lambda) \cdot GE(\lambda) \cdot QE(\lambda)}. 
+\end{equation}
+The results can be found in figure \ref{fig:allcorrected}. The figure shows a portion of the measured wavelength interval, as the noise at small and large wavelengths get amplified by very small values of the transmission and quantum efficiency. This can be seen at the spectrum of Benthos glass, where the errors at smaller wavelengths are very big, as the transmission is very large in this zone. 
+\par Finally, these corrected spectra are included in the Geant4 simulation for further calculations, although the QSI gel spectrum gets cut at $\SI{375}{nm}$, as at higher wavelength there is only noise that fluctuates around zero.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{Figures/spectrum/allSpec}
-    \caption{Caption}
-    \label{fig:my_label}
+    \includegraphics[width=\textwidth]{Figures/spectrum/allSpec-Corrrected.pdf}
+    \caption{Corrected spectra for both glass and the QSI gel samples (blue) and their relative transmission for scintillation photons (red). The uncertainty is depicted as a desaturated band around the data marker line. The maximum emission for these three samples occur just at the UV-cutoff of the transmission.}
+    \label{fig:allcorrected}
 \end{figure}
 
-\subsection{Correction factors}
-
-As already stated, the shape of the measured spectra is distorted by different factors from the experimental setup. These have to be measured and 
-\subsubsection{Quantum efficiency from the measuring PMT}
+Using the simulation described before, one can also test the claim made in the previous section, that the spectrum measured with the Wacker gel sample being exited by the $\ch{^{90}Sr}$ source was in fact produce only by Cherenkov light. For this, the scintillation is doused in the code, while the Cherenkov effect is included again into the physics list. The rest of the simulation works analogously as previously. This way, the transmission for the Cherenkov spectrum is calculated instead of for a flat one. In order to compare the results of the simulation with the measurement, the QE of the PMT and the grating efficiency is multiplied to the simulated transmission. The results are depicted in figure \ref{fig:CherenkovWacker}. The simulated spectrum has a cutoff at $\SI{260}{nm}$, as this is the first data point from the QE of the PMT. Starting from this point however, the curve is similar to the measured one.  
 
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1]{Figures/spectrum/WackerComparison.pdf}
+    \caption{Comparison between simulated and measured spectrum of the Wacker gel sample. With Geant4 the transmission for the Cherenkov spectrum produced by $\ch{^{90}Sr}$ and $\ch{^{90}Y}$ decays was calculated (blue curve) and then multiplied with the QE of the PMT and the efficiency of the monochromator's grating (black line) in order to be compared with the measurement (orange dots).}
+    \label{fig:CherenkovWacker}
+\end{figure}
 
+!!!!!!!!!!!!!!!!!!!!!bandgap estimation
+\section{Summary and outlook}
 
+\begin{wrapfigure}{O}{0pt}
+\centering
+\includegraphics[scale=1.0]{Figures/spectrum/spectrumMeasurementImproved.pdf}
+\caption{Experimental approach for an improvement of the results. The sample is positioned with an angle towards the optical system, such that only photons that traveled a short path through the sample are measured.}
+\label{fig:spectrumImproved}
+\end{wrapfigure}
 
-
-
-
-\subsubsection{Transmittance from the samples}
-
-
-\subsubsection{Efficiency of the monochromator grating}
-
-
-
+In the scope of this chapter we saw that it is possible to measure the wavelength of scintillation light coming from the samples. This gave us some information about the nature of this process, as the measured spectra lie near the bandgap energy of the material, excluding the possibility of a unique de-excitation centre. 
+\par Yet, there is room for improvement of the experimental approach, as different factors affected the results. On one side, the $\alpha$-source excited the air in its surrounding, contaminating the results with the discrete emission of molecular nitrogen. This radioactive source yields also a low emission intensity, and therefore a rather weak signal to noise ratio. The $\beta$-source on the other side, provided better results in terms of noise, but it generated also Cherenkov photons. Additionaly, as the emission was near the transmission cutoff of the sample, information was lost and the real emission could not be measured.
+\par A better approach would be to take advantage of the fact that scintillation light is emitted in all directions equally. Hence, one could measure the light that travelled the shortest path through the sample\footnote{Only a few $\rm{\mu m}$ for excitation with alpha particles.}, by irradiating the sample with $\alpha$-particles with a certain angle towards the entrance of the optical system (see figure \ref{fig:spectrumImproved}). This requires, however, two conditions: on the one hand, the measurement has to be done in a low pressure environment, so that the $\alpha$-particles reach the sample and in order to reduce the air scintillation. Also, the $\alpha$-source should have an activity of the order of hundreds of $\rm{GBq}$ for a better signal to noise ratio. This activity may need to be even higher, as probably the light must be coupled into a optical fibre, if the measurement is done in vacuum levels, which would severally reduce the detection efficiency. This setup, however, should deliver results with no external contamination and almost no information loss due to absorption inside the glass.
+\par Furthermore, this measurement should be done at different temperatures, as the scintillation spectrum in most semiconductors changes with the temperature.
