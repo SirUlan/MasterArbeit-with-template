@@ -226,7 +226,7 @@
 \RequirePackage{booktabs} % Required for better table rules
 
 \RequirePackage[]{caption} % Required for customising the captions
-\captionsetup[figure]{font=footnotesize,labelfont=bf,margin=25pt,format=hang}
+\captionsetup[figure]{font=footnotesize,labelfont=bf,margin=25pt}
 \captionsetup[table]{font=footnotesize,labelfont=bf,margin=25pt}
 
 %\RequirePackage[figurename=Fig.]{caption}

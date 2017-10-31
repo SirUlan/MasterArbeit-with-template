@@ -1,50 +1,96 @@
 \chapter{Scintillation Yield}
+In the chapters REF and REF the scintillation spectrum and lifetime of the investigated materials were determined. This chapter presentes the calculation of the last parameter, the scintillation yield. The first approach, described in section \ref{sec:YieldwSource},  was exciting the samples with an alpha source and measuring the PMT rate produced from the scintillation. The yield can be then determined if the geometry of the setup and the $\alpha$-emission is well known. For this purpose, the activity of the source was measured with an alpha spectrometer in section \ref{sec:alphaactivity}. 
+\par For the glass samples also a second approach was taken. The PMT was placed inside the glass vessels and then the darkrate increase was determined. The yield can be then calculated by simulating the decays with the activities given in chapter \ref{ch:GammaSpectroscopy}.
+\par For both cases, it is important to have a reliable method for measuring the PMT rate. The latter deviates from the real number of PMT detections due to different reasons that have to be taken into account in the calculation of the scintillation yield. The next section is dedicated to this topic.
+
 
 \section{Measuring PMT rates}
+In order to measure the rates of the PMT an oscilloscope \textit{PicoScope 6404C} is used. This can be operated in "block mode", where an adjustable number of waveforms (or captions) is measured and then sent to the computer. The number of sampling points in each caption can be set to one, so that the death time between two waveforms is only determined by the duration of the trigger rearming (a few $\rm{\mu s}$ according to Picoscope REF!). This whole process is controlled by a Python code, which also calculates the time $t_\textrm{N}$ needed for the oscilloscope for measuring $N$ captures. The requested number of waveforms is automatically set by the code, as having a constant number of captions could result in very few data points, if the PMT rate is low, or too many when it is high. This would be specially problematic for measurements in the climate chamber, as the temperature can change relatively quickly. Hence, in order to have a steady measurement rate, the number of captions is set so that $t_\textrm{N}$ lies inbetween $2$ to $\SI{3}{s}$.
+\par It stands to reason that the rates are given with $N\cdot t^{-1}_{\textrm{N}}$, however $t_\textrm{N}$ has to be corrected, as it is determined by the python code and not the oscilloscope, meaning that in this time the processing and data transfer time from the oscilloscope to the PC alters the real PMT rate. This correction is calculated in section \ref{sec:ratecorrection}. Nevertheless, still after this, the calculated rate is constrained by other parameters and deviates from the real number of detection of the PMT. One obvious variable is the undetected photoelectrons due to the trigger level, as alreadey explained in section \ref{sec:PHEloss}. Another parameter is the death time between captures, which will severely reduce the number of detections, as it is in the same order of magnitude as the decay constant of the scintillation. The calculation of the death time of the oscilloscope is shown in section \ref{sec:deathTime}.
+
 
 \subsection{Rates correction}
-
-\begin{wraptable}{O}{5.cm}
-\centering
-\caption{Coefficients of the quintic fit function.}
-\label{tab:quinticCoeff}
-\begin{tabular}{@{}ll@{}}
-\toprule
-$a_0$ & $\SI{-0.08\pm0.5}{s^{-1}}$               \\
-$a_1$ & $1.0026\pm0.0010$                        \\
-$a_2$ & $\SI{7.3\pm0.7}{\cdot 10^{-6}\,s}$       \\
-$a_3$ & $\SI{-0.8\pm1.7}{\cdot 10^{-10}\,s^{2}}$ \\
-$a_4$ & $\SI{-1.8\pm2.1}{\cdot 10^{-14}\,s^{3}}$ \\
-$a_5$ & $\SI{-8.1\pm8.8}{\cdot 10^{-19}\,s^{4}}$ \\ \bottomrule
-\end{tabular}
-\end{wraptable} 
-For estimating the error of the rate measurement described above and its correction, a pulse generator \footnote{RIGOL model DG1032Z} was connected to the oscilloscope producing pulses with random frequencies between $0$ and $\SI{10}{kHz}$. The accuracy of this generator is high, with an uncertainty of $\SI{\pm 1}{ppm}$ of the setting frequency value \cite{RIGOL}. These pulses where measured with the same code used for the PMT rates measurement, meaning that the number of captions is set in such a way, that the measurement time per data point is $\SI{2}{s}$ to $\SI{3}{s}$. Figure \ref{fig:correctionDarkrates} shows the results of this measurement. It can be seen, that as expected the measured rates are smaller than the set frequency, specially at higher rates. This can be partially explained by the increase of the delay with the number of captions. 
-\par The data shows an almost linear relationship, but it was fitted with polynomials of different numbers of degrees. The best result was achieved with a fifth degree polynomial 
-\begin{equation}
-    f(x) = \sum^{5}_{i=0}a_i \cdot x^{i},
-\end{equation}
-with the coefficients $a_i$ in table \ref{tab:quinticCoeff}. Correcting the measurement with this function produces a maximal relative error of about $\SI{0.3}{\%}$, as seen at the fit residuals in figure \ref{fig:correctionDarkrates}.
-\begin{figure}[H]
+\label{sec:ratecorrection}
+\begin{wrapfigure}{O}{0pt}
     \centering
     \includegraphics[scale=1.0]{Figures/yield/correctedDarkRates085.pdf}
     \caption{Measured quantum efficiency in dependence of the wavelength.}
     \label{fig:correctionDarkrates}
-\end{figure}
+\end{wrapfigure}
+For estimating the error of the rate measurement described above and its correction, a pulse generator \footnote{RIGOL model DG1032Z} was connected to the oscilloscope producing pulses with random frequencies between $0$ and $\SI{10}{kHz}$. The accuracy of this generator is high, with an uncertainty of $\SI{\pm 1}{ppm}$ of the set frequency value \cite{RIGOL}. These pulses where measured with the same code used for the PMT rates measurement, meaning that the number of captions is set in such a way, that the measurement time per data point is $\SI{2}{s}$ to $\SI{3}{s}$. Figure \ref{fig:correctionDarkrates} shows the results of this measurement. It can be seen, that as expected the measured rates are smaller than the set frequency, specially at higher rates. This can be partially explained by an increase in processing time of the oscilloscope with the number of captions or longer delay for the data delivering to the computer. 
+
+\par The measurement shows an almost linear relationship, nevertheless it was fitted with polynomials of different numbers of degrees. The best result was achieved with a fifth degree polynomial 
+\begin{equation}
+    f(x) = \sum^{5}_{i=0}a_i \cdot x^{i},
+\end{equation}
+with the coefficients $a_i$
+\begin{align*}
+&a_0 = \SI{-0.08\pm0.5}{s^{-1}}, \hspace*{10pt} & a_1 &= 1.0026\pm0.0010, \\
+&a_2=\SI{7.3\pm0.7}{\cdot 10^{-6}\,s}, \hspace*{10pt} & a_3 &= \SI{-0.8\pm1.7}{\cdot 10^{-10}\,s^{2}},\\
+&a_4 = \SI{-1.8\pm2.1}{\cdot 10^{-14}\,s^{3}}, \hspace*{10pt} & a_5 &= \SI{-8.1\pm8.8}{\cdot 10^{-19}\,s^{4}}.
+\end{align*}
+\noindent
+Correcting the rates with this function produces a maximal relative error of about $\SI{0.3}{\%}$, as seen at the residuals of the fit in figure \ref{fig:correctionDarkrates}.
+
+
+
+%\begin{wraptable}{O}{5.cm}
+%\centering
+%\caption{Coefficients of the quintic fit function.}
+%\label{tab:quinticCoeff}
+%\begin{tabular}{@{}ll@{}}
+%\toprule
+%$a_0$ & $\SI{-0.08\pm0.5}{s^{-1}}$               \\
+%$a_1$ & $1.0026\pm0.0010$                        \\
+%$a_2$ & $\SI{7.3\pm0.7}{\cdot 10^{-6}\,s}$       \\
+%$a_3$ & $\SI{-0.8\pm1.7}{\cdot 10^{-10}\,s^{2}}$ \\
+%$a_4$ & $\SI{-1.8\pm2.1}{\cdot 10^{-14}\,s^{3}}$ \\
+%$a_5$ & $\SI{-8.1\pm8.8}{\cdot 10^{-19}\,s^{4}}$ \\ \bottomrule
+%\end{tabular}
+%\end{wraptable} 
+
+
 
 \subsection{Death time between captures}
+\label{sec:deathTime}
+
 \begin{figure}[H]
 \centering
 \begin{minipage}{.5\textwidth}
   \centering
   \includegraphics[scale = 1.0]{Figures/yield/dTvCaptures05.pdf}
-  \captionof{figure}{A figure}
-  \label{fig:test1}
 \end{minipage}%
 \begin{minipage}{.5\textwidth}
   \centering
   \includegraphics[scale = 1.0]{Figures/yield/distribution05.pdf}
-  \captionof{figure}{Another figure}
-  \label{fig:test2}
 \end{minipage}
+  \caption{\textbf{Left:} \textbf{Right:}}
+  \label{fig:deathTimeResults}
 \end{figure}
 
+\section{Yield determination by external excitation}
+\label{sec:YieldwSource}
+\subsection{Activity of the alpha source}
+\label{sec:alphaactivity}
+For the determination of the absolute activity of the source an alpha spectrometer setup is used. The principle of an alpha spectrometer is very similar to the gamma spectroscopy explained in section \ref{sec:gammaspec}. In this case, the source is placed right in front of a semiconductor detector inside a vacuum chamber (pressure $<10^{-7}\,\rm{Bar}$), to avoid energy loss with air molecules. The signal of the semiconductor is shaped and amplified by a preamplifier and an amplifier, and then the signal's amplitude is digitised by a multichannel analyzer. This way, a energy spectrum of the emission is obtained. In the scope of this work, only the activity of the source is needed, thus only the integration of the spectrum is necessary (total number of counts). The activity of the source $A$ can be calculated with 
+\begin{equation}
+\label{eq:SourceActivity}
+    A = \frac{1}{4\pi}\Omega \cdot \frac{N^{\textrm{m}}_D}{t} = \varepsilon \cdot \frac{N^{\textrm{m}}_D}{t}, 
+\end{equation}
+where $\Omega$ is the solid angle covered by the detector, $\varepsilon$ the absolute detection efficiency, $N^{\textrm{m}}_D$ the number of detections and $t$ the duration of the measurement. The solid angle is only defined for a point source emission, otherwise $\varepsilon$ should be used.
+\par The calculation of the absolute detection efficiency is not trivial, as the distribution of the $\ch{^{241}Am}$ isotopes on the surface of the source is not known. To estimate this distribution, one can measure the relative change of $\varepsilon$ when the source is placed at different distances to the detector, and compare this to simulation results of a certain distribution. In the setup, the nearest the source and the semiconductor can be placed is $\SI{2\pm0.2}{mm}$. To increase the distance $d$, up to three holders each with width $\SI{11.0\pm0.1}{mm}$ are used. 
+\begin{figure}[H]
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[scale = 1.0]{Figures/yield/RadiusEstimation-Source.pdf}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[scale = 1.0]{Figures/yield/Average_activity.pdf}
+\end{minipage}
+\caption{\textbf{Left:} Comparison between simulation (lines) and the measurement results (points) of the relative efficiency variation at different source-detector distances for an assumed circular emission of radii $R_e \in [0,15]\,\rm{mm}$. The values of the measurement lie consistently between the results for $R_e = \SI{9}{mm}$ and $R_e = \SI{10}{mm}$. The uncertainties are smaller than the point markers. The simulation values are only valid at the distances where the measurements were done and are represented as lines for reasons of clarity. \textbf{Right:} Activity resulting from the measurement done at different distances. The mean and standard deviation (STD) of this points is also given with lines. }
+\label{fig:alphasourceRadiiandActivity}
+\end{figure}
+\par The source emission is first assumed to be circular with radius $R_e$ and isotrope. A radius of $R_e = \SI{0}{mm}$ would correspond to the case of a point source at the middle of the source. For this, a Geant4 code is used, where the setup geometry is reproduced and the fraction of detected particles $N^{\textrm{s}}_D$ from a total of $10^6$ is obtained. This is simulated for emissions with radii between $\SI{0}{mm}$ and $\SI{15}{mm}$ in $\SI{1}{mm}$ steps and source-to-detector distance as in the experimental setup. To compare the simulation results with each other and the measurement, the number of detections at each distance $N^{\textrm{s}}_D$ is divided by the mean $\overline{N^{\textrm{s}}_D}$ between the four distances. For the measurement results, the counts per second ($N^{\textrm{m}}_D \cdot t^{-1}$) is used instead of the total counts, as the duration of the measurements varies. The results are presented in the left plot of figure \ref{fig:alphasourceRadiiandActivity}. It can be seen, that the measurement results lie inbetween the values of the simulation with radii $\SI{9}{mm}$ and $\SI{10}{mm}$ at the four distances. Interpolating the $N^{\textrm{s}}_D / \overline{N^{\textrm{s}}_D}$ values with the measurement points, one obtains an effective emission radius of $R_{\textrm{eff}}=\SI{9.62\pm0.11}{mm}$.  Although most probably the density and shape of the isotope distribution on the source's surface is very complex, these results connote that it can be effectively described as a circular distribution of constant density.
+\par Simulating again with the calculated emission radius, the absolute detection efficiency $\varepsilon = N^{\textrm{s}}_D \cdot 10^{-6}$ is obtained for each distance and the activity is calculated with equation \ref{eq:SourceActivity}. The results can be seen at the right of figure \ref{fig:alphasourceRadiiandActivity}. The mean activity between the four distances is $\SI{2834\pm4}{Bq}$. The uncertainty of this value is only the statistical part originated from the error of the integration of the measured spectra and the efficiency calculated from the simulation ($\sqrt{N_D}$ in both cases). For determining the uncertainty stemming from $\Delta d$ and $\Delta R_{\textrm{eff}}$, the efficiency is simulated again but with distances $d \pm \Delta d$ and radii $R_{\textrm{eff}} \pm  \Delta R_{\textrm{eff}}$. The average activity between the four distances is calculated with these efficiencies, and the maximal deviation arising from $\Delta R_{\textrm{eff}}$ and $\Delta d$ are $\SI{16}{Bq}$ and $\SI{79}{Bq}$ respectively. Thus the absolute activity of the source is $A_s = \SI{2834\pm81}{Bq}$.
