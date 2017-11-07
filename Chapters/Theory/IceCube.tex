@@ -1,4 +1,22 @@
 \section{The IceCube neutrino observatory}
+\begin{wrapfigure}{O}{0.6\textwidth}
+    \centering
+    \includegraphics[width = 0.55\textwidth]{Figures/theory/edited-1.png}
+    \caption{Diagram of the IceCube Observatory at the South Pole. Figure courtesy of the IceCube Collaboration.}
+    \label{fig:IceCubeDetector}
+\end{wrapfigure}
+IceCube is the first kilometre-scale neutrino detector and is located at the South Pole starting at 1450 metres below the surface, with a total of $5160$ optical sensors for detecting the faint light produced in the particle interactions \cite{Aartsen_2017}. A sketch of the observatory is shown in figure \ref{fig:IceCubeDetector}. The primary array consists of 78 strings (cables) with a length of $\SI{1}{km}$ distributed over a square kilometre, each holding $60$ digital optical modules (DOMs) at $\SI{17}{m}$ vertical intervals. The inter-string distance in IceCube is $\SI{125}{m}$, which allows the investigation of neutrinos in the energy range between $\SI{100}{GeV}$ to $\mathcal{O}(\textrm{PeV})$. The DOMs incorporate a 10''-diamater photomultiplier tube (PMT) facing down, inside a glass pressure vessel, with circuit boards that allow near-autonomous operation\cite{Aartsen_2017}. PMT are extremely sensitive devices capable of measuring single photons. These are described later in this thesis in chapter \ref{ch:PMTs}.
+\par Eight extra string separated in avarage by about $\SI{72}{m}$ are located in the centre of the detector. The modules are deployed at depths of $\SI{2100}{m}$ to $\SI{2450}{m}$ with an inter-sensor spacing of only $\SI{7}{m}$. This more densely instrumented sub-detector is called \textit{DeepCore} and is optimised to detect neutrino of energies in the order of tens of $\textrm{GeV}$. 
+\par On the surface is based \textit{IceTop}, which consist of water tanks near the top of each string, with two DOMs each, forming a square kilometre air shower array. This can be used as a veto against atmospheric neutrinos and as a detector of cosmic rays in the $\SI{300}{TeV}$ to $\SI{1}{EeV}$ region. All the cables from the detector are routed to the IceCube Laboratory, which is the operation building of the detector located at the surface in the centre of the array. 
+\par The IceCube's commissioning was completed 2011 and since then it has already discovered a flux of high-energy neutrinos of cosmic origin \cite{Kopper2013}. An overview of the recent findings of IceCube regarding astrophysical neutrinos and cosmic rays can be found in \cite{Aartsen_2017_Results}. Nevertheless, the modest number of events limits the efficiency of this observatory. Therefore a substantial expansion of the detector is been seeked, \textit{IceCube-Gen2}, aiming the instrumentation of $\SI{10}{km^3}$ of glacial ice with novel technology \cite{1412.5106}.
 
-background processes -> this work 
 \subsection{IceCube-Gen2}
+\begin{wrapfigure}{O}{0.45\textwidth}
+    \centering
+    \includegraphics[width = 0.45\textwidth]{Figures/theory/gen2.png}
+    \caption{Benchmark detector string layout with a string-to string distance of about \\ $\sim \SI{240}{m}$. The new $120$ strings surround the more densely instrumented IceCube detector. Other geometries and spacings are under consideration. Figure taken from \cite{1412.5106}.}
+    \label{fig:IceCubeGen2Detector}
+\end{wrapfigure}
+The benchmark detector layout for IceCube-Gen2 considers the extension of $120$ new strings. With the calibration and building of IceCube the optical properties of the ice are now known with great detail over large distances and the absorption length of the Cherenkov light exceeds $\SI{100}{m}$-$\SI{200}{m}$ depending on the depth. This makes possible the instrumentation of considerable larger volumes with lower string densities than in IceCube. In this context, spacings between $\SI{240}{m}$ and $\SI{300}{m}$ are being considered. An example string layout is illustrated in figure \ref{fig:IceCubeGen2Detector}. The larger spacing result in a higher energy threshold above $\sim \SI{50}{TeV}$, but it does not represent a loss of astrophysical neutrino signal.
+-Cosntruction
+-Sensitivity improvement not only from volume but from angle -> New Software and Hardware -> mDOMS

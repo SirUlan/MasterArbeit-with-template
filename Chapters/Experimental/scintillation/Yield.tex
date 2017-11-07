@@ -5,7 +5,7 @@ In the chapters REF and REF the scintillation spectrum and lifetime of the inves
 
 
 \section{Measuring PMT rates}
-In order to measure the rates of the PMT an oscilloscope \textit{PicoScope 6404C} is used. This can be operated in "block mode", where an adjustable number of waveforms (or captions) is measured and then sent to the computer. The number of sampling points in each caption can be set to one, so that the death time between two waveforms is only determined by the duration of the trigger rearming (a few $\rm{\mu s}$ according to Picoscope REF!). This whole process is controlled by a Python code, which also calculates the time $t_\textrm{N}$ needed for the oscilloscope for measuring $N$ captures. The requested number of waveforms is automatically set by the code, as having a constant number of captions could result in very few data points, if the PMT rate is low, or too many when it is high. This would be specially problematic for measurements in the climate chamber, as the temperature can change relatively quickly. Hence, in order to have a steady measurement rate, the number of captions is set so that $t_\textrm{N}$ lies inbetween $2$ to $\SI{3}{s}$.
+In order to measure the rates of the PMT an oscilloscope \textit{PicoScope 6404C} is used. This can be operated in \textit{rapid block mode}, where an adjustable number of waveforms (or captions) is measured and then sent to the computer. The number of sampling points in each caption can be set to one, so that the death time between two waveforms is only determined by the duration of the trigger rearming (a few $\rm{\mu s}$ according to Picoscope REF!). This whole process is controlled by a Python code, which also calculates the time $t_\textrm{N}$ needed for the oscilloscope for measuring $N$ captures. The requested number of waveforms is automatically set by the code, as having a constant number of captions could result in very few data points, if the PMT rate is low, or too many when it is high. This would be specially problematic for measurements in the climate chamber, as the temperature can change relatively quickly. Hence, in order to have a steady measurement rate, the number of captions is set so that $t_\textrm{N}$ lies inbetween $2$ to $\SI{3}{s}$.
 \par It stands to reason that the rates are given with $N\cdot t^{-1}_{\textrm{N}}$, however $t_\textrm{N}$ has to be corrected, as it is determined by the python code and not the oscilloscope, meaning that in this time the processing and data transfer time from the oscilloscope to the PC alters the real PMT rate. This correction is calculated in section \ref{sec:ratecorrection}. Nevertheless, still after this, the calculated rate is constrained by other parameters and deviates from the real number of detection of the PMT. One obvious variable is the undetected photoelectrons due to the trigger level, as alreadey explained in section \ref{sec:PHEloss}. Another parameter is the death time between captures, which will severely reduce the number of detections, as it is in the same order of magnitude as the decay constant of the scintillation. The calculation of the death time of the oscilloscope is shown in section \ref{sec:deathTime}.
 
 
@@ -51,9 +51,14 @@ Correcting the rates with this function produces a maximal relative error of abo
 
 
 
-\subsection{Death time between captures}
+\subsection{Dead time between captures}
 \label{sec:deathTime}
-
+To determine the dead time between captures a sine wave with frequency $f_{in}$ is generated with the pulse generator and sampled in rapid block mode, as in the configuration of the rate measurement, but without a set trigger. Each capture takes one value of the sine amplitude, which gets digitised at 8 bit by the oscilloscope. The amplitude of the signal is set in such a way, that the whole range of the oscilloscope is used, for maximising the achieved resolution.
+\par As the oscilloscope is measuring without a trigger, the signal is being sampled at the maximal sampling rate, where the sampling period is determined by the dead time between the captures. Thus, by fitting the data with a sine function, the number of captures $N$ needed for the measurement of one period of the sine wave $P_{\textrm{in}}$ can be calculated, and thus also the sampling period
+\begin{equation*}
+    P_{\textrm{s}} = \frac{P_{\textrm{in}}}{N} = \frac{f_{\textrm{fit}}}{f_{\textrm{in}}},
+\end{equation*}
+where the $f_{\textrm{fit}}$ is the obtained frequency from the fit. This is done with a different number of captures, in order to investigate any dependency between the measurement configuration and the dead time. These results can be seen at the left side of figure \ref{fig:deathTimeResults}, showing no apparent dependency between the mean dead times measured with various number of captures, with deviations of less than $\SI{0.05}{\percent}$. The mean sampling period is $\SI{1063.701\pm0.023}{ns}$.
 \begin{figure}[H]
 \centering
 \begin{minipage}{.5\textwidth}
@@ -62,11 +67,13 @@ Correcting the rates with this function produces a maximal relative error of abo
 \end{minipage}%
 \begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[scale = 1.0]{Figures/yield/distribution05.pdf}
+  \includegraphics[scale = 1.0]{Figures/yield/distribution.pdf}
 \end{minipage}
-  \caption{\textbf{Left:} \textbf{Right:}}
+  \caption{\textbf{Left:} Comparison between the mean dead time retrieved with different number of captures. \textbf{Right:} The distribution of dead time between captures. It can be approximated as a Gaussian function.}
   \label{fig:deathTimeResults}
 \end{figure}
+\par Although the mean dead time can be retrieved with a very high accuaracy, this also will vary between captures.  As the fit curve always marks the position of the mean, the standard deviation of the sampling period can be estimated by calculating the distance between the data points to the fit curve along the x-axis. This yields the distribution shown in the right part of figure \ref{fig:deathTimeResults}, which can be fitted with a Gaussian with the standard deviation of $\sigma_{\textrm{1}}=\SI{82.68\pm0.28}{ns}$. However, this distribution get widened by the y-resolution steming from the digitasition of the oscilloscope. As commented, the data is ordered in 8 bit, therefore the amplitude can get integer values between -128 to 128. This means, there is an uncertainty of $0.5$ for every y-value, which also affects the x-residuals. Therefore the real variance of the dead time will be $\sigma_{\textrm{R}}^2 = \sigma_{\textrm{1}}^2 - \sigma_{\textrm{y-res.}}^2$, where $\sigma_{\textrm{y-res.}}$ is the x-residual widening stemming from the $y$ uncertainty. The latter is estimated by artificially doubelling the uncertainty to the $y$-values, increasing them randomly from a flat distribution of length $1$. The resulting x-residual distribution has a standard deviation of $\sigma_{\textrm{2}}= \sqrt{\sigma_{\textrm{R}}^2 + 2\cdot\sigma_{\textrm{y-res.}}^2 } = \SI{83.75\pm0.28}{ns}$ and therefore the standard deviation of the death time is  $\sigma_{\textrm{R}} =\sqrt{2\cdot\sigma_{\textrm{1}}^2 -\sigma_{\textrm{2}}^2 } = \SI{81.6\pm0.6}{ns}$.
+
 
 \section{Yield determination by external excitation}
 \label{sec:YieldwSource}
