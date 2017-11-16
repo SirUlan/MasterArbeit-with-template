@@ -17,7 +17,7 @@ In order to measure the rates of the PMT an oscilloscope \textit{PicoScope 6404C
     \caption{Measured quantum efficiency in dependence of the wavelength.}
     \label{fig:correctionDarkrates}
 \end{wrapfigure}
-For estimating the error of the rate measurement described above and its correction, a pulse generator \footnote{RIGOL model DG1032Z} was connected to the oscilloscope producing pulses with random frequencies between $0$ and $\SI{10}{kHz}$. The accuracy of this generator is high, with an uncertainty of $\SI{\pm 1}{ppm}$ of the set frequency value \cite{RIGOL}. These pulses where measured with the same code used for the PMT rates measurement, meaning that the number of captions is set in such a way, that the measurement time per data point is $\SI{2}{s}$ to $\SI{3}{s}$. Figure \ref{fig:correctionDarkrates} shows the results of this measurement. It can be seen, that as expected the measured rates are smaller than the set frequency, specially at higher rates. This can be partially explained by an increase in processing time of the oscilloscope with the number of captions or longer delay for the data delivering to the computer. 
+For estimating the error of the rate measurement described above and its correction, a pulse generator\footnote{RIGOL model DG1032Z} was connected to the oscilloscope producing rectangular pulses with $\SI{16}{ns}$ width and random frequencies between $0$ and $\SI{10}{kHz}$. The accuracy of this generator is high, with an uncertainty of $\SI{\pm 1}{ppm}$ of the set frequency value \cite{RIGOL}. These pulses where measured with the same code used for the PMT rates measurement, meaning that the number of captions is set in such a way, that the measurement time per data point is $\SI{2}{s}$ to $\SI{3}{s}$. Figure \ref{fig:correctionDarkrates} shows the results of this measurement. It can be seen, that as expected the measured rates are smaller than the set frequency, specially at higher rates. This can be partially explained by an increase in processing time of the oscilloscope with the number of captions or longer delay for the data delivering to the computer. 
 
 \par The measurement shows an almost linear relationship, nevertheless it was fitted with polynomials of different numbers of degrees. The best result was achieved with a fifth degree polynomial 
 \begin{equation}
@@ -77,15 +77,9 @@ where the $f_{\textrm{fit}}$ is the obtained frequency from the fit. This is don
 
 \section{Yield determination by external excitation}
 \label{sec:YieldwSource}
+In this section the yield is calculated exciting the samples with the alpha source. For this the activity and an estimation of the isotope distribution on the source surface is needed. Besides it is also necessary to calculate the air scintillation yield, since there is a small gap between the samples and the source.
 \subsection{Activity of the alpha source}
 \label{sec:alphaactivity}
-For the determination of the absolute activity of the source an alpha spectrometer setup is used. The principle of an alpha spectrometer is very similar to the gamma spectroscopy explained in section \ref{sec:gammaspec}. In this case, the source is placed right in front of a semiconductor detector inside a vacuum chamber (pressure $<10^{-7}\,\rm{Bar}$), to avoid energy loss with air molecules. The signal of the semiconductor is shaped and amplified by a preamplifier and an amplifier, and then the signal's amplitude is digitised by a multichannel analyzer. This way, a energy spectrum of the emission is obtained. In the scope of this work, only the activity of the source is needed, thus only the integration of the spectrum is necessary (total number of counts). The activity of the source $A$ can be calculated with 
-\begin{equation}
-\label{eq:SourceActivity}
-    A = \frac{1}{4\pi}\Omega \cdot \frac{N^{\textrm{m}}_D}{t} = \varepsilon \cdot \frac{N^{\textrm{m}}_D}{t}, 
-\end{equation}
-where $\Omega$ is the solid angle covered by the detector, $\varepsilon$ the absolute detection efficiency, $N^{\textrm{m}}_D$ the number of detections and $t$ the duration of the measurement. The solid angle is only defined for a point source emission, otherwise $\varepsilon$ should be used.
-\par The calculation of the absolute detection efficiency is not trivial, as the distribution of the $\ch{^{241}Am}$ isotopes on the surface of the source is not known. To estimate this distribution, one can measure the relative change of $\varepsilon$ when the source is placed at different distances to the detector, and compare this to simulation results of a certain distribution. In the setup, the nearest the source and the semiconductor can be placed is $\SI{2\pm0.2}{mm}$. To increase the distance $d$, up to three holders each with width $\SI{11.0\pm0.1}{mm}$ are used. 
 \begin{figure}[H]
 \centering
 \begin{minipage}{.5\textwidth}
@@ -99,5 +93,52 @@ where $\Omega$ is the solid angle covered by the detector, $\varepsilon$ the abs
 \caption{\textbf{Left:} Comparison between simulation (lines) and the measurement results (points) of the relative efficiency variation at different source-detector distances for an assumed circular emission of radii $R_e \in [0,15]\,\rm{mm}$. The values of the measurement lie consistently between the results for $R_e = \SI{9}{mm}$ and $R_e = \SI{10}{mm}$. The uncertainties are smaller than the point markers. The simulation values are only valid at the distances where the measurements were done and are represented as lines for reasons of clarity. \textbf{Right:} Activity resulting from the measurement done at different distances. The mean and standard deviation (STD) of this points is also given with lines. }
 \label{fig:alphasourceRadiiandActivity}
 \end{figure}
+For the determination of the absolute activity of the source an alpha spectrometer setup is used. The principle of an alpha spectrometer is very similar to the gamma spectroscopy explained in section \ref{sec:gammaspec}. In this case, the source is placed right in front of a semiconductor detector inside a vacuum chamber (pressure $<10^{-7}\,\rm{Bar}$), to avoid energy loss with air molecules. The signal of the semiconductor is shaped and amplified by a preamplifier and an amplifier, and then the signal's amplitude is digitised by a multichannel analyzer. This way, a energy spectrum of the emission is obtained. In the scope of this work, only the activity of the source is needed, thus only the integration of the spectrum is necessary (total number of counts). The activity of the source $A$ can be calculated with 
+\begin{equation}
+\label{eq:SourceActivity}
+    A = \frac{1}{4\pi}\Omega \cdot \frac{N^{\textrm{m}}_D}{t} = \varepsilon \cdot \frac{N^{\textrm{m}}_D}{t}, 
+\end{equation}
+where $\Omega$ is the solid angle covered by the detector, $\varepsilon$ the absolute detection efficiency, $N^{\textrm{m}}_D$ the number of detections and $t$ the duration of the measurement. The solid angle is only defined for a point source emission, otherwise $\varepsilon$ should be used.
+\par The calculation of the absolute detection efficiency is not trivial, as the distribution of the $\ch{^{241}Am}$ isotopes on the surface of the source is not known. To estimate this distribution, one can measure the relative change of $\varepsilon$ when the source is placed at different distances to the detector, and compare this to simulation results of a certain distribution. In the setup, $\SI{2\pm0.2}{mm}$ is the nearest the source and the semiconductor can be placed. To increase the distance $d$, up to three holders each with width $\SI{11.0\pm0.1}{mm}$ are used. 
 \par The source emission is first assumed to be circular with radius $R_e$ and isotrope. A radius of $R_e = \SI{0}{mm}$ would correspond to the case of a point source at the middle of the source. For this, a Geant4 code is used, where the setup geometry is reproduced and the fraction of detected particles $N^{\textrm{s}}_D$ from a total of $10^6$ is obtained. This is simulated for emissions with radii between $\SI{0}{mm}$ and $\SI{15}{mm}$ in $\SI{1}{mm}$ steps and source-to-detector distance as in the experimental setup. To compare the simulation results with each other and the measurement, the number of detections at each distance $N^{\textrm{s}}_D$ is divided by the mean $\overline{N^{\textrm{s}}_D}$ between the four distances. For the measurement results, the counts per second ($N^{\textrm{m}}_D \cdot t^{-1}$) is used instead of the total counts, as the duration of the measurements varies. The results are presented in the left plot of figure \ref{fig:alphasourceRadiiandActivity}. It can be seen, that the measurement results lie inbetween the values of the simulation with radii $\SI{9}{mm}$ and $\SI{10}{mm}$ at the four distances. Interpolating the $N^{\textrm{s}}_D / \overline{N^{\textrm{s}}_D}$ values with the measurement points, one obtains an effective emission radius of $R_{\textrm{eff}}=\SI{9.62\pm0.11}{mm}$.  Although most probably the density and shape of the isotope distribution on the source's surface is very complex, these results connote that it can be effectively described as a circular distribution of constant density.
 \par Simulating again with the calculated emission radius, the absolute detection efficiency $\varepsilon = N^{\textrm{s}}_D \cdot 10^{-6}$ is obtained for each distance and the activity is calculated with equation \ref{eq:SourceActivity}. The results can be seen at the right of figure \ref{fig:alphasourceRadiiandActivity}. The mean activity between the four distances is $\SI{2834\pm4}{Bq}$. The uncertainty of this value is only the statistical part originated from the error of the integration of the measured spectra and the efficiency calculated from the simulation ($\sqrt{N_D}$ in both cases). For determining the uncertainty stemming from $\Delta d$ and $\Delta R_{\textrm{eff}}$, the efficiency is simulated again but with distances $d \pm \Delta d$ and radii $R_{\textrm{eff}} \pm  \Delta R_{\textrm{eff}}$. The average activity between the four distances is calculated with these efficiencies, and the maximal deviation arising from $\Delta R_{\textrm{eff}}$ and $\Delta d$ are $\SI{16}{Bq}$ and $\SI{79}{Bq}$ respectively. Thus the absolute activity of the source is $A_s = \SI{2834\pm81}{Bq}$.
+
+\sub\begin{wrapfigure}{o}{0.5\textwidth}
+\centering
+\includegraphics[scale=1.0]{Figures/lifetime/f1.pdf}
+\includegraphics[scale=1.0]{Figures/lifetime/f2.pdf}
+\includegraphics[scale=1.0]{Figures/lifetime/f3.pdf}
+\caption{Reconstructed fractional contribution $\widetilde{f}$ for an emission with a certain initial set of fractional contributions $f_i$, calculated analytically and with a simulation. In each plot, the values of only two components are shown, as $f_l=1-f_k-f_m$ always applies. The uncertainties of the simulation results are smaller than the marker size.}
+\label{fig:fsfs}
+\end{wrapfigure}
+
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[scale=1.0]{Figures/PMTChar/PMTrates.pdf}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[scale=1.0]{Figures/PMTChar/PMTratesZoom.pdf}
+  \end{minipage}
+  \caption{\textbf{Left:}  \textbf{Right:} }
+  \label{fig:PMTrates}
+\end{figure}
+
+
+
+\subsection{Air scintillation yield}
+Reference $\SI{19\pm3}{MeV^{-1}}$  \cite{Sand_2014} , $\SI{18.9\pm2.5}{MeV^{-1}}$ \cite{Thompson_2016}
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[scale=1.0]{Figures/yield/airLFcomparison.pdf}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[scale=1.0]{Figures/yield/airFinal.pdf}
+  \end{minipage}
+  \caption{\textbf{Left:}  \textbf{Right:} }
+  \label{fig:airYield}
+\end{figure}

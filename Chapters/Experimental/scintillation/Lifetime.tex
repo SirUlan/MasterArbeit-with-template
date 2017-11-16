@@ -1,0 +1,175 @@
+\chapter{Lifetime}
+This chapter presents the results of the lifetime measurement of the glass and gel samples. First, the acquisition and calculation of the time distributions is explained in section \ref{sec:measuringLifeTime}. Further these results are corrected in section \ref{sec:correctionOfLifeTime}, due to limitations of the detection method.
+\section{Measuring the time distribution}
+\label{sec:measuringLifeTime}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.39\textwidth}
+    \includegraphics[scale=1.0]{Figures/lifetime/lifeTimeMeasurement.pdf}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.59\textwidth}
+    \includegraphics[width = 0.9\textwidth, draft = false]{Figures/lifetime/lifeTimeMeasurement-photo.pdf}
+  \end{minipage}
+  \caption{\textbf{Left:}  Schematic drawing of the lifetime measurement setup. The dark box is located inside the climate chamber for the temperature regulation. Not shown in the sketch is the amplifier between PMT and oscilloscope and the high voltage supplier for the PMT. \textbf{Right:} Picture of the setup inside the dark box. T stands for temperature and H for humidity.}
+  \label{fig:LifetimeMeasurement}
+\end{figure}
+
+Figure \ref{fig:LifetimeMeasurement} illustrates the experimental setup of the lifetime measurement. The samples are excited by an alpha source and the scintillation is measured by the PMT located in front of the sample. These are placed inside a light-tight box inside the climate chamber. For recording the humidity and temperature, a sensor is placed on the side of the PMT base. A second sample with a temperature sensor is placed at the same height as the first specimen. In order to maximise the heat transfer, the sample and the sensor are connected via thermal grease. This is necessary since the thermal conductivity of the sample and the PMT base are different.
+\par The signal of the PMT is measured with an oscilloscope\footnote{PicoScope 6404C}. For every trigger event, a waveform of the next $\SI{100}{\mu s}$ is processed, saving the arrival time, charge and amplitude of every signal that surpasses the trigger of $\SI{-18}{mV}$. This is done for $200000$ events at temperatures between $\SI{-50}{\celsius}$ and $\SI{-15}{\celsius}$ in $\SI{5}{\celsius}$ steps. The measurement starts when both temperature sensors read a value at most $\SI{0.2}{\celsius}$ away from the target temperature. With this data, it is possible to make a histogram with the arrival times, which corresponds roughly to time distribution of the emission. Two examples of such distributions are shown in figure \ref{fig:TimeDistributionCorr}. The glass samples show a rather long emission and their histogram is thus affected by the correlated noise, especially by the late afterpulsing (see REF), which appears at around $\SI{3}{\mu s}$ and thus has to be corrected for further calculations. This can be done by replacing the source and sample with a pulsed LED, which emits nearly exclusively SPE at approximately the same rate as the emission with the source. Processing the same number of events, the resulting histogram will not only show the correlated signals but also the effects of random noise, as the LED only causes the first photon of the waveform. Subtracting this distribution to the one measured with the samples results in a better approximation of the real emission (see the left plot of figure \ref{fig:TimeDistributionCorr}). For the gel samples this is done analogously, although as their scintillation is very fast (<$\SI{200}{ns}$), the correlated noise in this range does not affect the measurement a lot. This is presented on the right side of figure \ref{fig:TimeDistributionCorr}.
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[scale=1.0]{Figures/lifetime/benthos-corecction.pdf}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[scale=1.0]{Figures/lifetime/QSI-nocorrectionneeded.pdf}
+  \end{minipage}
+  \caption{Time distributions of the emission from the Benthos glass (left) and QSI gel sample (right) at $\SI{-15}{\celsius}$. In order to remove the afterpulsing, the correlated noise was measured by triggering the first event with the emission of a LED and subtracted from the distributions. The corrected distribution for the gel sample is not shown, as the difference with the original cannot be noticed visually.}
+  \label{fig:TimeDistributionCorr}
+\end{figure}
+
+\par These distributions were fitted with multi-exponential decays (see equation REF!) and a constant. The best fit for the glass and QSI gel sample was achieved with three exponential decays and for the Wacker gel sample with two.  Here it is important to start making the fits with a very fine binning, as this defines the resolution for the possible measurable lifetimes. Once the shortest time constant is found, it is possible to make a rebinning for better statistics. For the glass samples the fits were done with a final bin width of $\SI{20}{ns}$ and for the gel samples of $\SI{1}{ns}$. 
+\par A more relatable parameter for describing the exponential decays are the fractional contributions $f_i$ instead of the amplitude $\alpha_i$, since it can be interpreted as the percentage of photons emitted by each component. It is given by
+\begin{equation}
+    f_i = \frac{\alpha_i \tau_i}{\sum_j\alpha_j\tau_j},
+\end{equation}
+where $\tau_i$ is the lifetime and $\alpha_i \tau_i$ the total number of detected photons stemming from the component $i$. The fit of the time distribution of the four materials at $\SI{-15}{\celsius}$ are illustrated in figure \ref{fig:4lfdecayfit}. Table \ref{tab:fitLTglass} gives the resulting fit parameters of the glass and gel samples respectively.
+
+
+\begin{table}[H]
+\centering
+\caption{Fit parameters with a multi-exponential decay for measured time distributions of the glass and gel samples at different temperatures. The best fit was achieved with three exponential decays, excepting for the Wacker gel emission, which shows a two-exponential decay emission.}
+\label{tab:fitLTglass}
+\begin{tabular}{@{}llllll@{}}
+\toprule
+\multicolumn{6}{l}{Vitrovex glass}                                                                                                                                  \\ \midrule
+                  & $\SI{-15}{\celsius}$      & $\SI{-25}{\celsius}$      & $\SI{-35}{\celsius}$      & $\SI{-45}{\celsius}$      & $\SI{-50}{\celsius}$      \\\midrule
+$f_1$             & $0.132\pm0.004$           & $0.119\pm0.004$           & $0.113\pm0.004$           & $0.117\pm0.004$           & $0.123\pm0.004$           \\
+$\tau_1$          & $\SI{356\pm9}{ns}$        & $\SI{334\pm9}{ns}$        & $\SI{323\pm9}{ns}$        & $\SI{321\pm9}{ns}$        & $\SI{377\pm10}{ns}$       \\
+$f_2$             & $0.362\pm0.008$           & $0.354\pm0.008$           & $0.345\pm0.008$           & $0.336\pm0.008$           & $0.331\pm0.008$           \\
+$\tau_2$          & $\SI{2.84\pm0.06}{\mu s}$ & $\SI{2.70\pm0.06}{\mu s}$ & $\SI{2.66\pm0.06}{\mu s}$ & $\SI{2.63\pm0.06}{\mu s}$ & $\SI{2.99\pm0.07}{\mu s}$ \\
+$f_3$             & $0.506\pm0.009$           & $0.527\pm0.009$           & $0.542\pm0.009$           & $0.547\pm0.009$           & $0.546\pm0.010$           \\
+$\tau_3$          & $\SI{19.3\pm0.4}{\mu s}$  & $\SI{18.6\pm0.4}{\mu s}$  & $\SI{20.1\pm0.4}{\mu s}$  & $\SI{19.3\pm0.5}{\mu s}$  & $\SI{23.5\pm0.7}{\mu s}$  \\\midrule
+$\overline{\tau}$ &  $\SI{10.8\pm0.3}{\mu s}$ & $\SI{10.8\pm0.3}{\mu s}$  & $\SI{11.9\pm0.3}{\mu s}$  & $\SI{11.5\pm0.4}{\mu s}$  & $\SI{13.9\pm0.4}{\mu s}$   \\\toprule
+\multicolumn{6}{l}{Benthos glass}                                                                                                                                   \\\midrule
+$f_1$             & $0.158\pm0.007$           & $0.155\pm0.007$           & $0.142\pm0.006$           & $0.142\pm0.007$           & $0.134\pm0.006$           \\
+$\tau_1$          & $\SI{357\pm12}{ns}$       & $\SI{391\pm13}{ns}$       & $\SI{321\pm11}{ns}$       & $\SI{345\pm13}{ns}$       & $\SI{308\pm12}{ns}$       \\
+$f_2$             & $0.309\pm0.013$           & $0.324\pm0.013$           & $0.309\pm0.012$           & $0.308\pm0.013$           & $0.304\pm0.012$           \\
+$\tau_2$          & $\SI{2.75\pm0.10}{\mu s}$ & $\SI{3.04\pm0.11}{\mu s}$ & $\SI{2.52\pm0.09}{\mu s}$ & $\SI{2.52\pm0.10}{\mu s}$ & $\SI{2.38\pm0.09}{\mu s}$ \\
+$f_3$             & $0.533\pm0.014$           & $0.521\pm0.015$           & $0.550\pm0.013$           & $0.550\pm0.014$           & $0.562\pm0.013$           \\
+$\tau_3$          & $\SI{18.2\pm0.6}{\mu s}$  & $\SI{20.0\pm0.7}{\mu s}$  & $\SI{19.5\pm0.6}{\mu s}$  & $\SI{17.6\pm0.6}{\mu s}$  & $\SI{16.9\pm0.5}{\mu s}$  \\\midrule
+$\overline{\tau}$ &  $\SI{10.6\pm0.4}{\mu s}$  &  $\SI{11.5\pm0.5}{\mu s}$    &  $\SI{11.5\pm0.5}{\mu s}$    &   $\SI{10.5\pm0.4}{\mu s}$     & $\SI{10.3\pm0.4}{\mu s}$  \\ 
+\toprule
+\multicolumn{6}{l}{Wacker gel}                                                                                                                           \\ \midrule
+$f_1$             & $0.826\pm0.018$          & $0.787\pm0.016$          & $0.784\pm0.016$          & $0.781\pm0.015$          & $0.775\pm0.016$          \\
+$\tau_1$          & \small{$\SI{11.57\pm0.13}{ns}$ } & \small{$\SI{12.06\pm0.14}{ns}$}  & \small{$\SI{12.71\pm0.14}{ns}$}  & \small{$\SI{12.82\pm0.14}{ns}$}  & \small{$\SI{13.09\pm0.15}{ns}$}  \\
+$f_2$             & $0.174\pm0.018$          & $0.213\pm0.016$          & $0.216\pm0.016$          & $0.219\pm0.015$          & $0.225\pm0.016$          \\ 
+$\tau_2$          & $\SI{126\pm13}{ns}$      & $\SI{119\pm9}{ns}$       & $\SI{119\pm9}{ns}$       & $\SI{115\pm8}{ns}$       & $\SI{115\pm8}{ns}$       \\\midrule
+$\overline{\tau}$ &  $\SI{31.5\pm3.2}{ns}$     &   $\SI{34.8\pm2.7}{ns}$      &   $\SI{35.7\pm2.7}{ns}$    &  $\SI{35.2\pm2.5}{ns}$     &    $\SI{36.0\pm2.6}{ns}$     \\\toprule
+\multicolumn{6}{l}{QSI gel}                                                                                                                              \\\midrule
+$f_1$             & $0.762\pm0.011$          & $0.787\pm0.013$          & $0.798\pm0.011$          & $0.801\pm0.011$          & $0.796\pm0.011$          \\
+$\tau_1$          & \small{$\SI{1.009\pm0.017}{ns}$} & \small{$\SI{1.100\pm0.016}{ns}$} & \small{$\SI{1.093\pm0.016}{ns}$} & \small{$\SI{1.075\pm0.015}{ns}$} & \small{$\SI{1.064\pm0.016}{ns}$} \\
+$f_2$             & $0.183\pm0.010$          & $0.136\pm0.009$          & $0.121\pm0.008$          & $0.105\pm0.008$          & $0.100\pm0.008$          \\
+$\tau_2$          & $\SI{8.58\pm0.29}{ns}$   & $\SI{11.0\pm0.6}{ns}$    & $\SI{10.7\pm0.6}{ns}$    & $\SI{10.0\pm0.6}{ns}$    & $\SI{10.2\pm0.7}{ns}$    \\
+$f_3$             & $0.055\pm0.007$          & $0.077\pm0.0012$         & $0.081\pm0.009$          & $0.094\pm0.008$          & $0.104\pm0.009$          \\
+$\tau_3$          & $\SI{40.9\pm2.7}{ns}$    & $\SI{39.9\pm2.8}{ns}$    & $\SI{50.7\pm2.9}{ns}$    & $\SI{50.6\pm2.4}{ns}$    & $\SI{48.6\pm2.3}{ns}$    \\\midrule
+$\overline{\tau}$ & $\SI{4.6\pm0.4}{ns}$    &  $\SI{5.4\pm0.3}{ns}$   & $\SI{6.3\pm0.5}{ns}$   & $\SI{6.7\pm0.5}{ns}$   &  $\SI{6.9\pm0.5}{ns}$   \\ \bottomrule
+\end{tabular}
+\end{table}
+
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=1.0]{Figures/lifetime/fourFT.pdf}
+  \caption{Time distribution of the emission of the four samples at $\SI{-15}{\celsius}$, after subtracting the correlated noise. The fits with the multi-exponential decays are shown with a black line. }
+  \label{fig:4lfdecayfit}
+\end{figure}
+\begin{wrapfigure}{o}{0.5\textwidth}
+\centering
+\includegraphics[scale=1.0]{Figures/lifetime/chargeDist-50.pdf}
+\caption{Charge distribution of the events forming the decay curves at $\SI{-15}{\celsius}$.}
+\label{fig:charDist}
+\vspace{-10pt}
+\end{wrapfigure}
+\noindent
+As the fits deliver $7$ parameters in the case of a triple-exponential decay and $5$ in the case of two, it is difficult to have an overview of what is happening with the lifetime at different temperatures. Furthermore, the parameter $\alpha_i$ and $\tau_i$ are correlated, and therefore results from two different measurements cannot be compared easily. In this regard it useful to determine the average lifetime $\overline{\tau}$, which is given by
+\begin{equation}
+    \overline{\tau}=\sum_i f_i\cdot \tau_i.
+\end{equation}
+The average lifetimes of the distributions are also shown in table \ref{tab:fitLTglass}. The results of the glass samples are very similar with an average time constant of around $\sim \SI{10}{\mu s}$. It seems to be an increase of the lifetime with lower temperatures, although not by much. The gel samples, on the other side, exhibit a much faster emission with an average time constant of approximately $\sim \SI{5}{ns}$ (QSI) and $\sim \SI{35}{ns}$ (Wacker), and a more distinguishable time lengthen of the emission at colder environments. REF to theory!. 
+\par The emission of the gel samples is probably faster than measured, as the time resolution (TTS) of the PMT plays a role in this range.  Especially for the QSI sample with its time constant component of $\sim \SI{1}{ns}$ the probability of detecting two photons without being able to differentiate them is quite high. This can be tested by comparing the charge histograms of the detected scintillation, which is illustrated in figure \ref{fig:charDist}. It is noteworthy, that while with the glass sample almost exclusively SPE are measured (mean charge $\SI{1.067\pm0.001}{phe}$ and $\SI{1.053\pm0.002}{phe}$ with Vitrovex and Benthos respectively), the gel samples present a more considerable amount of multi-photoelectron events. The charge distribution of the emission of the Wacker gel sample has an average of $\SI{1.177\pm0.003}{phe}$ and the one of the QSI gel of $\SI{1.615\pm0.002}{phe}$, which is to be expected, as the latter exhibits the fastest emission. This has as a consequence that the time distribution has fewer counts towards shorter times. For the emission of the Wacker gel, this distortion should not be big, as most events were SPE, but this is not the case for the QSI emission. One possible correction method tested in the scope of this thesis was to make the histogram with weighed events by their charge. However, this distorted the distributions and made the subtraction of the correlated noise not doable. Because of the time constraints, a correction of this effect could not be done. Nevertheless, in the context of the dark rate, an emission of $\SI{1}{ns}$ is already well under the time resolution of the PMT ($\sim\SI{3}{ns}$, see section \ref{sec:TTS}) and thus it should not make a difference if this is even faster. 
+
+
+\section{Correction of the lifetime}
+
+\label{sec:correctionOfLifeTime}
+\subsubsection{Why is a correction needed? A toy model}
+Since in the measurement the first measured photon is used as the trigger and $t=0$, the results are distorted to slower scintillation times. This effect can be best described in a simplified model of the measurement. Lets assume a triple-exponential decay with lifetimes $\tau_i$, time constant $\lambda_i = \tau_i^{-1}$,  and amplitude $\alpha_i$:
+\begin{equation*}
+    \sum_{i=1}^3 \alpha_i \exp(-\lambda_i \cdot t), \hspace{1cm } f_i = \frac{\alpha_i \tau_i}{\sum_j\alpha_j\tau_j}
+\end{equation*}
+where $f_i$ fractional contribution of each component. If we measure two photons from this distribution, the probability that the first stems from the component $l$ and the second from $k$ is
+\begin{equation*}
+\begin{split}
+\int_0^{\infty}P(t;\lambda_l) \cdot \Big( \int_t^{\infty}P(t';\lambda_k) \cdot  dt' \Big) \cdot  dt & = \int_0^{\infty} \lambda_l \exp(-\lambda_l \cdot t)  \cdot \Big( \int_t^{\infty} \lambda_k \exp(-\lambda_k \cdot t')   \cdot  dt' \Big) \cdot dt \\
+& =  \int_0^{\infty} \lambda_l \exp(-(\lambda_l+\lambda_k)\cdot t) \cdot dt \\
+& = \dfrac{\lambda_l}{\lambda_l+\lambda_k},
+\end{split}
+\end{equation*}
+\noindent
+where $P(t;\lambda)$ is the probability density function (pdf) of an exponential distribution with time constant $\lambda$. If in the measurement only two photons are detected per decay, only the last photon will contribute to the measured time distribution. 
+\begin{wrapfigure}{o}{0.5\textwidth}
+\centering
+\includegraphics[scale=1.0]{Figures/lifetime/f1.pdf}
+\includegraphics[scale=1.0]{Figures/lifetime/f2.pdf}
+\includegraphics[scale=1.0]{Figures/lifetime/f3.pdf}
+\caption{Reconstructed fractional contribution $\widetilde{f}$ for an emission with a certain initial set of fractional contributions $f_i$, calculated analytically and with a simulation. In each plot, the values of only two components are shown, as $f_l=1-f_k-f_m$ always applies. The uncertainties of the simulation results are smaller than the marker size.}
+\label{fig:fsfs}
+\end{wrapfigure}
+
+By calculating the probability for the detection of a photon of the component $k$ after another one, the reconstructed fractional contribution $\widetilde{f_k}$ can be described by
+\begin{equation}
+\label{eq:frec}
+\widetilde{f_k} = f_k^2 + 2\cdot \dfrac{\lambda_l}{\lambda_l+\lambda_k}f_l\cdot f_k + 2\cdot \dfrac{\lambda_m}{\lambda_k+\lambda_m}f_m\cdot f_k.
+\end{equation}
+The first term of the equation \ref{eq:frec} is the probability for both detected photons stemming from the distribution $l$, the second and third term includes the probability of measuring one photon of $k$ or $m$ followed by one of the $l$ component. It is noted that by describing one of the contributions with the other two $f_l=1-f_k-f_m$, it can be easily proved that the condition $\sum_i \widetilde{f_i} = 1$ is valid. 
+\par In figure \ref{fig:fsfs} the reconstructed fractional contribution $\widetilde{f_1}$ and $\widetilde{f_3}$ for lifetimes $\tau_1 = \SI{100}{ns}$, $\tau_2 = \SI{1}{\mu s}$ and $\tau_3 = \SI{10}{\mu s}$ and for different initial $f_i$ is shown. Since the photons from the component 1 are emitted faster, the probability that the second photon stems from 2 or 3 is higher and therefore $\widetilde{f_1}$ is always smaller than $f_1$. Conversely, the emission from component 3 is slow compared to the other two and thus the probability for the second photon originating from 3 is high. Hence  $\widetilde{f_3}$ is always larger than $f_3$. The measured fractional component of 2 results in an intermediate case, being an underestimation of $f_2$ if more photons are being emitted from 2 than from 1, and overestimated if it is not the case.
+\par The calculations until now have assumed that after one decay only two photons $N=2$ are detected. This is the worst case scenario and the lowest number of photons with which such a lifetime measurement can be done. If the number of detections per decay increases, the error made is lower, as less information is lost. Nevertheless, the calculation of $\widetilde{f_i}$ for $N>2$ is not trivial, as the number of permutations quickly increases with $N$ and in the measurement with the samples up to $N \sim 50$ photons per decay are detected. Moreover, the measurement of the samples results in a distribution of the number of photons per decay $P(N)$, which complicates any attempt at correcting the measured lifetimes analytically.
+\par Another possibility for estimating the error made in the measurement is to simulate the emission and detection. One decay is simulated by sampling from the triple-exponential-decay of a certain $f_i$ a $N$ number of times following the measured $P(N)$. To the sampled times, the earliest one is subtracted. This is done several times in order to produce a histogram. Fitting this histogram gives the $\widetilde{f_i}$ values, which can be compared with the measurement. During all this process, the lifetimes are being handled as constants. For the sake of consistency, this simulation was done with $\tau_1 = \SI{100}{ns}$, $\tau_2 = \SI{1}{\mu s}$ and $\tau_3 = \SI{10}{\mu s}$ and $P(N=2)=1$. The results are shown in figure \ref{fig:fsfs} and exhibit no deviation to the analytical calculations. 
+\subsubsection{Correction with the measured distributions}
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[scale=1.0]{Figures/lifetime/DistributionAloneAndVitro.pdf}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[scale=1.0]{Figures/lifetime/DistributionDeconvoluted.pdf}
+  \end{minipage}
+  \caption{\textbf{Left:} Distribution of the number of photon per waveform for the measurement with the LED and the excited Vitrovex glass sample at $\SI{-50}{\celsius}$.  \textbf{Right:} Deconvolution of the Vitrovex distribution at $\SI{-50}{\celsius}$ for removing effects of afterpulsing and background.}
+  \label{fig:PhotonDist}
+\end{figure}
+The measured distribution of the number of detections per decay is not the same as $P(N)$ needed for the correction, as it also includes afterpulsing events and the dark rate. In order to get rid of these influences, one can assume that the measured distribution is a convolution of $P(N)$ to the response to an SPE, which can be estimated using the measurement with the LED, as there the PMT is detecting almost exclusively SPE events. Both distributions are illustrated in the left plot of figure \ref{fig:PhotonDist} for the measurement of the Vitrovex sample at $\SI{-50}{\celsius}$. This convolution implies that measuring two photons doubles the probability for measuring an afterpulsing and other correlated events, which is true. However, the distribution of the afterpulsing measurement also contains dark rates and thus, using it as a response function would also imply that the probability of a random event doubles after the detection of two photons as well, which is obviously false. Nevertheless, this is not a big problem, as the probability of detecting a dark rate inside the $\SI{100}{\mu s}$ window ($\sim \SI{0.7}{\percent}$) is lower than the one of afterpulsing ($\sim \SI{6}{\percent}$). In order to get $P(N)$ the measured distribution $P_{m}(N)$ has to be deconvoluted with the response function $P_{LED}(N)$:
+\begin{equation}
+P(N)=\mathcal{F}^{-1}\Big( \frac{\mathcal{F}(P_{m}(N))}{\mathcal{F}(P_{LED}(N))}\Big),
+\end{equation}
+where $\mathcal{F}$ represents the Fourier transform and $\mathcal{F}^{-1}$ the inverse Fourier transform. Computationally, this calculation is done via a fast Fourier transform algorithm. The results of the measurement of the Vitrovex sample at $\SI{-50}{\celsius}$ is shown in the right plot of figure \ref{fig:PhotonDist}. As expected, the mean number of photons detected after a decay decreases after the deconvolution, in this example from $\sim 3.3$ to $\sim3.0$.
+\par With the deconvoluted $P(N)$ it is then possible to simulate the emission as described in the last section. 
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[scale=1.0]{Figures/lifetime/vitro_fs.pdf}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[scale=1.0]{Figures/lifetime/vitro_fs2.pdf}
+  \end{minipage}
+  \caption{\textbf{Left:} Distribution of the number of photon per waveform for the measurement with the LED and the excited Vitrovex glass sample at $\SI{-50}{\celsius}$.  \textbf{Right:} Deconvolution of the Vitrovex distribution at $\SI{-50}{\celsius}$ for removing effects of afterpulsing and background.}
+  \label{fig:fSimVitrovex-50}
+\end{figure}
