@@ -36,6 +36,7 @@ parskip, % Uncomment to add space between paragraphs
 headsepline, % Uncomment to get a line under the header
 chapterinoneline, % Uncomment to place the chapter title next to the number on one line
 %consistentlayout, % Uncomment to change the layout of the declaration, abstract and acknowledgements pages to match the default layout
+%openany
 ]{MastersDoctoralThesis} % The class file specifying the document structure
 
 \usepackage[utf8]{inputenc} % Required for inputting international characters
@@ -59,6 +60,14 @@ chapterinoneline, % Uncomment to place the chapter title next to the number on o
 \usepackage[bottom]{footmisc}
 \usepackage[leftcaption]{sidecap}
 \sidecaptionvpos{figure}{c}
+
+\makeatletter
+\renewcommand\chapter{\clearpage
+                    \thispagestyle{plain}%
+                    \global\@topnum\z@
+                    \@afterindentfalse
+                    \secdef\@chapter\@schapter}
+\makeatother
 
 
 %----------------------------------------------------------------------------------------
@@ -120,6 +129,8 @@ chapterinoneline, % Uncomment to place the chapter title next to the number on o
 
 
 \begin{document}
+
+
 \captionsetup[figure]{name={Fig.}}
 \def\equationautorefname~#1\null{equation (#1)\null}
 
@@ -313,19 +324,19 @@ chapterinoneline, % Uncomment to place the chapter title next to the number on o
 
 % Include the chapters of the thesis as separate files from the Chapters folder
 % Uncomment the lines as you write the chapters
-\the\textwidth
+%\the\textwidth
 
 %\sffamily
-\thefontsize\tiny tiny \\
-\thefontsize\scriptsize scriptsize  \\
-\thefontsize\footnotesize footnotesize \\
-\thefontsize\small small \\
-\thefontsize\normalsize normalsize \\
-\thefontsize\large large \\
-\thefontsize\Large Large \\
-\thefontsize\LARGE LARGE \\
-\thefontsize\huge huge \\
-\thefontsize\Huge Huge \\
+%\thefontsize\tiny tiny \\
+%%\thefontsize\scriptsize scriptsize  \\
+%\thefontsize\footnotesize footnotesize \\
+%\thefontsize\small small \\
+%\thefontsize\normalsize normalsize \\
+%\thefontsize\large large \\
+%\thefontsize\Large Large \\
+%\thefontsize\LARGE LARGE \\
+%\thefontsize\huge huge \\
+%\thefontsize\Huge Huge \\
 
 
 

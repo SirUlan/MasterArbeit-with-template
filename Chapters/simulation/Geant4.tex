@@ -1,0 +1,89 @@
+\chapter{Geant4 simulation}
+\label{ch:g4}
+Throughout this thesis, different simulations are necessary for correcting or interpreting results, as well for estimating the mDOM background inside the ice. These are done with Geant4, which is a software toolkit based on C++ developed at CERN and KEK for the simulation of particles passing through matter using Monte-Carlo methods. It is used by a vast number of experiments in different fields, such as high energy physics, medical science and astrophysics \cite{Allison_2016}.
+\par In defining the software components, various aspects are included in the simulation: the geometry of the setup and the materials properties involved in it, the particles of interest, the physics processes and models governing the interactions, the storage and visualisation of events for the post-processing of the data. An extensive set of physical models are already included in the Geant4 base code for a wide range of energy ranges, which have been widely validated with different experiments \cite{AGOSTINELLI2003250}.
+\par In this thesis, a modified version of the simulation initially written in the framework of two PhD thesis \cite{LEW,bjorn} for the simulation of the mDOM response is used. 
+\section{Geometry}
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[scale=1.0]{Figures/simulation/G4-mDOM.pdf}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[scale=1.0]{Figures/simulation/G4-DOM.pdf}
+  \end{minipage}
+  \caption{\textbf{Left:} model of the mDOM as implemented in Geant4. Optical properties derived from measurements are applied to the main components. The holding structure is defined as an absorber, i.e. any photon that is in contact with it is deleted. \textbf{Right:} model of the DOM. The lower part of the module is filled with a gel volume and the rest with air. The board and base are defined as absorbers. }
+  \label{fig:G4Doms}
+\end{figure}
+The simplest geometry definition in Geant4 is based on constructing with primitive building volumes (spheres, cylinders, ellipsoids, cubes, etc.), whose shape can be further adjusted by means of boolean operations. To each of these volumes a material is assigned, which also has a table of physical properties that define the possible interactions with particles (if a volume does not have any physical properties assigned, particles do not get affected by it). Within the scope of the module simulation, the most important properties are the refractive index and absorption length of the materials, as these determine completely the behaviour of photons. Within this context, the properties of glass and gel from different brands can be chosen, including the ones of interest for this work: Vitrovex glass, Benthos glass, QSI gel and Wacker gel.  
+\par Different geometries that replicate the measurement setups where simulated in the framework of this thesis. These are shown in their respective sections. For chapter REF, however, the detailed module geometries written by Lew Classen\cite{LEW} are used, which are illustrated in figure  \ref{fig:G4Doms}. These feature the main components of the mDOM and DOM, with dimensions that fit information from technical drawings. 
+
+
+\section{Physics and primary particles}
+
+\begin{wrapfigure}{o}{0.4\textwidth}
+\centering
+
+\includegraphics[scale=1.0]{Figures/simulation/G4-DomK40.pdf}
+\rule[2.5mm]{0.33\textwidth}{0.1pt}
+\includegraphics[scale=1.0]{Figures/simulation/G4-AirScint.pdf}
+
+\caption{\textbf{Top}: One event of a $\ch{^{40}K}$ decay inside the DOM glass. The orange lines represent the trajectorie of single photons. The positions of interactions are marked by yellow dots. \textbf{Bottom}: Cumulative output of three events of alpha particles exiting the air, which then scintillates.}
+\label{fig:SimExamples}
+\end{wrapfigure}
+
+A simulation starts with the generation of a primary particle including its initial properties (energy, location, direction, etc.). This particle then interacts with the simulated geometry and, if applicable, also produces secondary particles, depending on the implemented processes. The simulation of a single primary particle is called an \textbf{event}. Figure \ref{fig:SimExamples} shows two examples. The figure on the top illustrates the decay of a $\ch{^{40}K}$ nucleus inside the pressure vessel of the DOM, producing Cherenkov and scintillation photons. The second example presents the cumulative output of three events, where the emission of alpha particles from a source was simulated for the study of air luminescence (see section \ref{sec:Airscint}). As different simulations were done in this thesis, the primary particle used are mentioned in their respective sections.
+\par As mentioned, Geant4 provides already a library of physics models. The user only has to specify the particles and processes that should be taken into account to compile a so-called $\textbf{physics list}$. Table \ref{tab:physicsList} summarises the particles and interactions considered in the model used in this work. 
+\par For the simulation of the scintillation, the default class of Geant4, \textit{G4Scintillation}, was modified in the scope of this thesis. The original code only allows the simulation of single or double exponential decays and was thus extended to triple exponential decays. Also, in the default class it is only possible to set either an universal scintillation yield for all particles, where the amount of emitted photons increases linearly with the particle energy (as in equation REF),  or the user can provide tables for each particle with the number of emitted photons at different energies of the particle. The latter is intended for materials with non-linear behaviour, which are, however, not considered in this thesis. Hence, a third option was added, enabling the definition of different scintillation yields depending on the particle, instead of using the same for each.
+\par Finally, for the simulation of radioactive decays, the property table of the isotopes was modified, so that every nucleus decays with a lifetime of $\SI{0}{s}$. This is done for being able to save the time of the interactions, without losing information in the nanosecond scale due to the limited value range of the float bit width.
+
+
+
+\begin{table}[h]
+\centering
+\caption{Particles and physics processes included in the simulation with their corresponding classes. The mDOMScintillation class is a modified version of G4Scintillation (see text).}
+\label{tab:physicsList}
+\begin{tabular}{@{}lll@{}}\toprule
+Particle                                                                  & Process                                                                          & Geant4 Class                    \\ \midrule
+Optical photon                                                            & Absorption                                                                       & G4OpAbsorption                  \\
+                                                                          & \begin{tabular}[c]{@{}l@{}}Optical processes\\ at medium interfaces\end{tabular} & G4OpBoundaryProcess             \\
+                                                                          & Mie scattering                                                                   & G4OpMieHG                       \\ \midrule
+Gamma                                                                     & Pair production                                                                  & G4LivermoreGammaConversionModel \\
+                                                                          & Compton effect                                                                   & G4LivermoreComptonModel         \\
+                                                                          & Photoelectric effect                                                             & G4LivermorePhotoElectricModel   \\ \midrule
+Electron                                                                  & Scattering                                                                       & G4eMultipleScattering           \\
+                                                                          & Ionisation                                                                       & G4LivermoreIonisationModel      \\
+                                                                          & Brehmsstrahlung                                                                  & G4eBremsstrahlung               \\
+                                                                          & Cherenkov radiation                                                              & G4Cerenkov                      \\
+                                                                          & \begin{tabular}[c]{@{}l@{}} $\bullet \,$For positron:\\ \hspace{4pt} annihilation\end{tabular}             & G4eplusAnnihilation             \\ \midrule
+Ions                                                                      & Scattering                                                                       & G4hMultipleScattering           \\
+                                                                          & Ionisation                                                                       & G4ionIonisation                 \\
+                                                                          & Radioactive decay                                                                & G4RadioactiveDecay              \\ \midrule
+Alpha                                                                     & Scattering                                                                       & G4hMultipleScattering           \\
+                                                                          & Ionisation                                                                       & G4ionIonisation                 \\ \midrule
+\begin{tabular}[c]{@{}l@{}}All particles above\\ excepting photons\end{tabular} & Material scintillation                                                           & mDOMScintillation               \\ \bottomrule
+\end{tabular}
+\end{table}
+
+
+\section{Photon handling}
+\label{sec:photonhandlingG4}
+For the simulations done in this thesis, there will always be a ``detector'' volume, which will save the information of certain particles that interact with it. In the case of the simulation of PMTs, this is the photocathode. After an optical photon hits this volume, its information (wavelength, hit location and time, mother particle, etc.)  is saved in different vectors and then ``killed'', i.e. the simulation of the photon is stopped. The saved information can be then processed and saved.
+\par In the scope of this thesis, a PMT response class was written for a more efficient data post processing. This considers the quantum efficiency of the PMT\footnote{Based on the code written by Cristian Lozano in the framework of the thesis \cite{cris}.} and also its time response. The QE is simulated at the moment the photon hits the photocathode. Here, a random number between $0$ and $1$ is generated; if this number is smaller than the QE for the wavelength of the photon, the hit is considered for further processing.
+ \par To take into account the TTS and time response, a random value sampled from a Gaussian distribution with mean $\SI{0}{s}$ and standard deviation equal to the TTS of the PMT is added to the arrival time of the detected photons. Then the hits are ordered regarding their hit time and it is tested if the PMT could have measured every photon separately. For this, two aspects are considered. In some experimental setups, there is a dead time after the detection of a PMT pulse. In this case, all simulated hits inside the dead time are deleted. If there is no dead time and only a bare PMT is simulated, when two or more photons are detected inside a small time windows an SPE pulse for every photon is generated, forming a waveform. The SPE pulse must be provided by the user. An example is shown in figure \ref{fig:waveforms}. With this waveform, it is possible to check if the hits were temporally resolved above the trigger level of the measuring device. If for a hit this is not the case, i.e. it was inside the pulse of the previous photon and the threshold was not surpassed a second time, this hit is deleted. Every hit also has an ``amplitude'' array, which considers the number of photons detected in it. For example, if a hit is followed by three other photons that were not temporally resolved, this hit will have an amplitude of four. This is important for post-simulation processing of the data, as SPE pulses may not be detected, because of the trigger level of the device, and the number of hits has to be corrected\footnote{This is not simulated right away, as the percentage of SPE loss in a measurement can change rather quickly depending on different parameters (see \ref{sec:PHEloss}). Therefore, the most efficient option is to save every photon that was temporally resolved, and then do a post-processing for the consideration of these factors.}.
+
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.39\textwidth}
+    \includegraphics[scale=1.0]{Figures/theory/SPE.pdf}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.6\textwidth}
+    \includegraphics[scale=1.0]{Figures/theory/waveform.pdf}
+  \end{minipage}
+  \caption{\textbf{Right:} Average SPE measured with a PMT Hamamatsu R$12119$-$02$. \textbf{Left:} Example for a simulated waveform in Geant4 for the counting of hits.}
+  \label{fig:waveforms}
+\end{figure}
+

@@ -169,3 +169,15 @@ after the measurement the dark current of the devices is measured. For this the 
 \end{equation}
 where  $QE(\lambda)$ is the quantum efficiency for the wavelength $\lambda$, $I(\lambda)$ the measured current at $\lambda$ and $DC$ the average dark current. 
 \par Figure \ref{fig:QEresultsNormalPMT} shows the calculated QE of the PMT. It is to notice, that the uncertainty of the measurement increases in the UV-region. This is a measurement artifact due to the low intensity of the measured photocurrent, which drops to levels similar to the dark current. Also, the QE rises in the interval $250$-$\SI{265}{nm}$, most probably attributable to effects from scattered light inside the monochromator. A small fraction of the output from the monochromator is scattered light from every wavelength of the light source. The spectrum of the Xenon lamp in the UV region is very dim and hence the intensity of the contamination can be similar or larger than the one from the selected wavelength, overestimating the QE of the device being measured. Therefore the data points between $250$-$\SI{280}{nm}$ are excluded from every further calculation. In figure \ref{fig:QEresultsNormalPMT} the average QE of X PMTs and its standard deviation is depicted as a reference. The measured PMT exhibits thus an expected response. (!!!!!!!?)
+
+\section{Average SPE pulse}
+
+\begin{wrapfigure}{o}{0pt}
+\centering
+\includegraphics[scale=1.0]{Figures/PMTChar/SPE-amplifier.pdf}
+\caption{Average SPE from the PMT used in the measurements.}
+\label{fig:SPEamp}
+\vspace{-10pt}
+\end{wrapfigure}
+As introduced in section \ref{sec:photonhandlingG4}, the Geant4 simulation used in this thesis can form waveforms given a curve that represents a single photoelectron pulse. Therefore the average SPE from the PMT in this setup is needed. For this, the PMT dark rate pulses are measured at room temperature, considering only the signals with a charge in the interval $Q_1\pm \sigma_1$, where $Q_1$ is the mean charge of the SPE and $\sigma_1$ its standard deviation obtained from the calibration. In order to match the positioning of the pulses, each one is shifted so that its minimum lies in $t=0$. The result of averaging $\sim 3700$ of such pulses is illustrated in figure \ref{fig:SPEamp}. Noteworthy are the reflections, which are probably produce by the coupling between the cables and the amplifier, as this SPE can be compared with the pulse shown in figure \ref{fig:waveforms}, which was made from this same setup and PMT, but without the amplifier.
+\par As the gain change with temperature, also the SPE minima will vary. This is however not considered in the simulation and only the SPE at room temperature is used. Nevertheless, this should be still a good approximation for the purposes of this thesis, as the waveforms are simulated just for reasons of time resolution. 
