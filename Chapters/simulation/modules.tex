@@ -1,6 +1,179 @@
-\chapter{Module.f}
+\chapter[Simulation of dark rates in optical modules]{\LARGE{Simulation of dark rates in optical modules}}
+
+In the previous chapters the amount of isotopes inside glass and gel samples were determined and the light produced by the radioactive decays was characterized. With this information, the background produced by the vessel glass and the gel inside the optical modules can be simulated. In this context, the following sections will describe the expected noise separating it between correlated and uncorrelated background, thus presenting its time distribution. Furthermore, as measured in chapter \ref{ch:scintParameters} the scintillation properties are highly temperature dependent and therefore section REF will introduce the expected temperature dependence of the background.
+
+\par The time distribution of the noise is usually presented in a log$_{10}$($\Delta t$) diagramm. As this kind of plots may not be a common way of displaying data, the next section presents a small introduction on the interpretation of correlated and uncorrelated noise in the log$_{10}$($\Delta t$) representation.
+
+
+\section{Introduction to log$_{10}$($\Delta t$) diagramms}
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[scale=1.0]{Figures/simulation/linearX.pdf}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[scale=1.0]{Figures/simulation/logX.pdf}
+  \end{minipage}
+  \caption{Probability density function of the waiting time $t$ for a background event stemming from random noise of rate $\SI{50}{s^{-1}}$ and $\SI{500}{s^{-1}}$. \textbf{Left:} with linear and \textbf{right:} with logarithmic representation of the time.}
+  \label{fig:linearAndLog}
+\end{figure}
+Random noise of average rate $\mu$ of hits per second is a Poissonian process, since the probability for an event is independent of the past. Let $D$ be the waiting time for a first hit. The probability that $D$ is larger than a given time $t$ is
+\begin{equation}
+\label{eq:probab}
+    P(D>t) = \frac{(\mu \cdot t)^0 e^{(-\mu\cdot t)}}{0!} = \exp{(-\mu\cdot t)}.
+\end{equation}
+Hence, the cumulative density function (CDF) $F(t)$ is given by 
+\begin{equation}
+F(t) = P(D\leq t) = 1 - \exp{(-\mu\cdot t)} 
+\end{equation}
+and its  probability density function (PDF) $f(t)$ by the derivative of the CDF 
+\begin{equation}
+f(t) = \frac{d}{dt} F(t) = \mu\cdot\exp{(-\mu\cdot t)} .
+\end{equation}
+Therefore, the time difference between subsequent hits from random background is expected to produce an exponential decay with a slope equal to the average rate of the noise (assuming logarithmic scale in the ordinate). As an example, the $\Delta t$ distribution for random background of rate $\SI{50}{s^{-1}}$ and $\SI{500}{s^{-1}}$ is shown in the left part of figure \ref{fig:linearAndLog}. However, this is only valid for a linear application of the abscissa. If the time is represented by its logarithm applying the substitution $t=10^x$ the CDF of the distribution in \ref{eq:probab} is equal to  $F_l(x) = 1 - \exp{(-\mu\cdot 10^x)} $ and thus the PDF is given by
+\begin{equation}
+\label{eq:PDFlog}
+    f_l(x) = \frac{d}{dx} F_l(x) = \mu\cdot 10^x \cdot \log{(10)} \cdot \exp{(-\mu\cdot 10^x)}.
+\end{equation}
+\par For comparison, the random background of $\SI{50}{s^{-1}}$ and $\SI{500}{s^{-1}}$ is given in this representation in the right part of figure \ref{fig:linearAndLog}. Although the PDF for the logarithmus of the time is more complex, it has some advantages over the linear representation, e.g. the maximum of equation \ref{eq:PDFlog} lies at $x = -\log_{10}{(\mu)}$, and thus the rate can be more easily visualised than in the linear case. Moreover, the benefits of a log$_{10}$($\Delta t$) representation manifests itself for background that combine both, correlated and uncorrelated signals, like the case of a PMT or the optical modules, as these processes can be better differentiated.
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[scale=1.0]{Figures/simulation/HVDT-Benthos-linear.pdf}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[scale=1.0]{Figures/simulation/HVDT-Benthos-log.pdf}
+  \end{minipage}
+  \caption{Measured time between subsequent signals $\Delta t$ of a PMT inside a Benthos half vessel at $\SI{-50}{\celsius}$. Also shown with a yellow line is the fit of the Poisson expectation for the uncorrelated part of the background.\textbf{Left:} histogram of the $\Delta t$ distribution. \textbf{Right:} histogram of the logarithm of the $\Delta t$ data. Here, also the simulated distribution stemming from scintillation is shown with a green line.}
+  \label{fig:HVtime}
+\end{figure}
+
+\par In order to give an example of correlated and uncorrelated background, the time of subsequent hits from a PMT inside the Benthos half pressure vessel was measured. The signal of the PMT is splitted with a T-adapter and sent to two different oscilloscopes\footnote{ Model 1 and Model 2}. One of them saved the time difference of pulses inside waveforms of $\SI{100}{\mu s}$ and the second oscilloscope the $\Delta t$ between triggers, which has a lower boundery as the rearming of the trigger takes around $\sim \SI{1}{\mu s}$. Combining the data from both devices into a histogram yields the results shown in figure \ref{fig:HVtime}(left). As there are correlated noise originating from the PMT (afterpulsing) and the vessel (coincident hits from scintillation of radioactive decays) the $\Delta t$ distribution deviates from the Poissonian one showing a larger number of counts for very short time differences. Taking the logarithm of the data and graphing it as a histogram yields the results shown in the right part of figure \ref{fig:HVtime}. In this case the correlated background can be better distinguished from the Poissonian expectation and the process causing the different structures can be deduced. In section \ref{ch:lifetime}, the most probably time delay for late afterpulsing of the PMT was found to be at aroung $\SI{3}{\mu s}$, while for the early afterpulsing at $<\SI{50}{ns}$ (see figure \ref{fig:TimeDistributionCorr}). These times correspond to the peaks seen at  $\sim \SI{-5.5}{log_{10}(s)}$ and $\sim \SI{-7.6}{log_{10}(s)}$ in figure \ref{fig:HVtime} right.
+\par The expected $\Delta t$ distribution from luminescence light was also simulated for this setup using the scintillation parameters measured in chapter \ref{ch:scintParameters} and the mass-specific activity of the isotopes inside the half vessel measured in chapter \ref{ch:GammaSpectroscopy}. The result are also presented in figure \ref{fig:HVtime}, although here the amplitude of the histogram was modified in order to fit the measured curve. It is noticeable that luminescence accounts for most of the correlated background under $\SI{-5}{log_{10}(s)}$, but that it also contributes to the uncorrelated peak. This part stem from the time differences between photons from different decays, which is random and determined by the activities of the isotopes. The sum of several Poissonian processes with a rate $\lambda _ i$ results in a single Poisson distribution of rate $\sum_i\lambda_i$, and thus only one Peak from the uncorrelated background is measured. Furthermore, the simulated distribution does not account for the correlated noise measured at longer time differences at around $\SI{-4}{log_{10}(s)}$.
+\begin{wrapfigure}{O}{0pt}
+\centering
+\includegraphics[scale=1.0]{Figures/simulation/HVDT-Benthos-20.pdf}
+\caption{Measured time between subsequent signals of a PMT inside a Benthos half vessel at $\SI{20}{\celsius}$.}
+\label{fig:Benthos20Deg}
+\end{wrapfigure}
+\par For comparison figure \ref{fig:Benthos20Deg} shows the same measurement done at $\SI{20}{\celsius}$. Here, the effects of the luminescence background are almost unnoticeable, as the yield decreases with higher temperatures (see section \ref{sec:YieldwSource}), leaving only the dark rate from the PMT. As the thermionic noise from the PMT is much higher at this temperature, the Poissonian peak shifts towards shorter times. However, it is to notice that the correlated background measured between $\sim \SI{-4.7}{log_{10}(s)}$ and $\sim \SI{-3}{log_{10}(s)}$ in figure \ref{fig:HVtime}, which can not be explained by luminescence parametrised with the result from chapter \ref{ch:scintParameters}, also does not appear in the measurement at $\SI{20}{\celsius}$. This suggest that this background must also stem from scintillation, which would mean that there is one or more extra time constants in the order of $\textrm{ms}$. The exponential decays from lifetimes in this order of magnitude would be seen as a constant and could not have been extracted from the waveforms of $\SI{100}{\mu s}$ used in the measurements of section \ref{ch:lifetime}.
+\par Altogether, log$_{10}$($\Delta t$) diagrams are a helpful resource for analysing correlated and uncorrelated noise. In this context, in the next two sections the contribution of the scintillation light to the overall background of the modules will be simulated and discussed in more detail.
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Current IceCube DOM}
+
+
+
+
+
 
 \begin{figure}[H]
+  \centering
+  \includegraphics[scale=1.]{Figures/simulation/Stanisha-Simu.pdf}
+  \caption{Simulated time between subsequent hits in log$_{10}$($\Delta t$) for a DOM in ice at $\SI{-35}{\celsius}$. For comparison, both measured set of isotope activites BAS-1 (table \ref{table:actCanada}) and BAS-2 (table \ref{tab:actMue}) were used. The errorbars are smaller than width of the line.}
+  \label{fig:DOM-SIMU}
+\end{figure}
+
+
+
+
+\begin{wrapfigure}{O}{0pt}
+\centering
+\includegraphics[scale=1.0]{Figures/simulation/cerScintDT.pdf}
+\caption{Time between subsequent hits considering only Cherenkov photons (blue line), only scintillation (yellow line) and both (green line). The statistical uncertainty is not depicted, as it is smaller than the line width.}
+\label{fig:cerscintTDF}
+\end{wrapfigure}
+
+
+The time distribution of the background and its total rate depends on the amount of radioactivity in the glass. There were two set of isotopes activities measured for the Benthos glass in chapter \ref{ch:GammaSpectroscopy}, which will produce different results. For the sake of simplicity, the set of activites for the Benthos samples summarised in table \ref{table:actCanada} and \ref{tab:actMue} will be referenced as ``BAS-1'' and ``BAS-2'' respectively. Figure \ref{fig:DOM-SIMU} shows the expected noise distribution for a DOM module with a $\SI{9.07}{kg}$\footnote{Teledyne Benthos, 2013. Deep Sea Glass Spheres. Available online at: \url{http://www.teledynemarine.com/Lists/Downloads/Flotation_Spheres_Data_Sheet_2013_lo.pdf} (Last accessed 18 December 2017). } pressure vessel with the measured isotope activities. Since in BAS-2 the activity of the $\ch{^{238}U}$ chain is $\sim \SI{42}{\percent}$ larger, the expected background for this set is higher and the maximum of the Poissonian peak lies also at shorter time intervals.
+Figure \ref{fig:cerscintTDF} shows the fastest hits in the interval $-10$ to $\SI{-8}{log_{10}(s)}$, which correspond to time differences between $\SI{0.1}{ns}$ and $\SI{10}{ns}$. Here are depicted the results of the simulation including only the rates from Cherenkov photons, from scintillation and including both. It can be seen that the principal source of hits in this region originate from Cherenkov light and that the contribution of the luminescence noise decreases exponentially with shorter times. However, it has to be noticed that in the simulation either TTS nor the PMT pulse length was taken into account, and therefore most of this time differences can not be measured. The pulse length (FWHM) of the PMT used inside DOMs (Hamamatsu R7081-02) is about $\SI{7.5}{ns}$ \cite{Abbasi:2010vc}, and hence $\Delta t$ shorter than $\SI{-8}{log_{10}(s)}$ will be strongly suppressed, as is the case in the measurements shown in figures \ref{fig:HVtime} and \ref{fig:Benthos20Deg}.
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[scale=1.0]{Figures/simulation/differentIsotopeActivities.pdf}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.49\textwidth}
+      \includegraphics[scale=1.0]{Figures/simulation/differentYieldsDT.pdf}
+  \end{minipage}
+  \caption{Relative change of the background time distribution by varying the isotope activity in the glass (\textbf{left}) and the scintillation yield (\textbf{right}). The statistical uncertainty is not depicted, as it is smaller than the line width.}
+  \label{fig:yieldAdependency}
+\end{figure}
+\par In order to compare the shapes of the time distribution curve from both isotope activities sets these were normalised in the left side of figure \ref{fig:yieldAdependency}. Here are also shown the results for the case of vessel with $\SI{50}{\percent}$ and $\SI{150}{\percent}$ of the isotope activities from BAS-1. The peak from luminescence does not change with a variation of the amount of radioactivity and only the position of the Poissonian part moves towards higher or lower rates. This is to be expected, as the scintillation peak is produced by photons from the same decay and therefore its shape is independent of the radioactive decay rate. On the right side of figure \ref{fig:yieldAdependency} is shown the normalised distribution for three different scintillation yield values. As already mentioned, the results shown in figure \ref{fig:cerscintTDF} are for the scintillation parameters at $\SI{-35}{\celsius}$, viz. a yield of $\SI{34}{MeV^{-1}}$. Comparing the results for this yield value with a lower of $\SI{20}{MeV^{-1}}$ and a larger one of $\SI{50}{MeV^{-1}}$ it can be noticed that the relative height of the luminescence peak in regards to the Poissonian part changes. With an increase of the yield the number of hits from a single decay is larger, while only the first and last detected photon from the decays contribute to the uncorrelated part, reducing its relative contribution to the overall distribution. A similar reasoning can be done for the region of the distribution stemming from the Cherenkov radiation, since this is independent of the yield. Although the rate of Cherenkov photons detected is the same, the Cherenkov part of the distribution has a larger relative contribution to the distribution if the yield is smaller. Furthermore, it is noteworthy that the shape of the scintillation part also changes with the yield, having fewer counts at shorter $\Delta t$. This may be a similar effect as the one encounter in section \ref{ch:lifetime}. The first photon detected from a decay does not contribute to the correlated part of the distribution, but to the Poissonian peak. Therefore the number of detected $\Delta t$ corresponding to the shortest lifetime is lower than the emitted one. This effect is further enhanced, when the number of photons per decay decreases.
+
+
+\par In IceCube the time distribution of the background can be studied separatedly for each DOM with the HitSpool data\footnote{HitSpooling is a standard DAQ feature that buffers the raw data stream of the modules around supernova candidate triggers. Further information can be found in \cite{Heereman}.}. This data is however limited to the dead time of the DOM mainboard, with a minimum time between triggers of $\SI{2.45}{\mu s}$ depending on the readout sequence \cite{Heereman}. This precludes the study of most of the correlated noise. Nevertheless, a glimpse of this region was provided in \cite{Stanisha}, where the HitSpool distribution was combined with FRT\footnote{At Fixed Rate Trigger (FRT) events $\SI{10}{ms}$ of raw data is saved every $\SI{30}{s}$ for every DOM} data. This data set does not have enough statistics in order to construct a time distribution of the background for each DOM and thus the information of every module was combined in a single histogram. The results obtained with this approach are shown in figure \ref{fig:Stanisha}. Here roughly the same features can be found as in the measurement shown in \ref{fig:HVtime}, including an afterpulsing peak at around $\sim \SI{-5.1}{log_{10}(s)}$ (as the R7081-02 PMT is larger than the Hamamtsu R12199-02, it takes longer for the ions to reach the photocathode).
+\par It is noteworthy that the Gaussian fit found for the correlated noise in \cite{Stanisha} is very similar to the results shown in figure \ref{fig:DOM-SIMU}. Excluding the Cherenkov contribution at very short time differences, the simulated distribution exhibits a maximum at around $\SI{-6}{log_{10}(s)}$ and decreasing somewhat symmetrically until about $\SI{-8}{log_{10}(s)}$ and  $\SI{-4}{log_{10}(s)}$. Nevertheless, the distribution in figure \ref{fig:Stanisha} also features a long timescale correlated peak centred at $\SI{-4}{log_{10}(s)}$, which is not explained by the scintillation parameters measured in this thesis. This was seen also in the results of the measurement done with the Benthos half vessel in last section (see figure \ref{fig:HVtime}) and probably stems from longlived luminescence transitions.
+\begin{figure}[H]
+  \centering
+\includegraphics[width = 0.9\textwidth]{Figures/simulation/Stanisha.png}
+  \caption{Time distribution of the DOM background in IceCube. In order to make this histogram, the HitSpool and FRT data of all modules were combined. Figure taken from \cite{Stanisha}.}
+  \label{fig:Stanisha}
+\end{figure}
+With the Geant4 simulation it is also possible to calculate the expected dark rate cause by scintillation for the DOMs in ice. First, the decay of the three decay chains and $\ch{^{40}K}$ is simulated $2\times 10^6$ times each, once for every scintillation parameters at $T_i = [-15,-25,-35,-45,-50]\,^\circ\rm{C}$. As the results of these calculations are to be compared with the HitSpool data, in the simulation is set a dead time of $\SI{2.45}{\mu s}$ between hits. Also, the PMT waveform and QE are considered, as explaine in chapter \ref{ch:g4}. The output of the simulation provides the average number of photons detected $H(T_i,I)$ for the temperature $T$ and isotope $I$. Thus, the rate $R$ at $T_i$ is calculated with
+\begin{equation}
+    R(T_i) = \sum_I H(T_i,I)\times A_I \times m, 
+\end{equation}
+where $A_I$ is the mass-specific activity of the isotope $I$ and $m=\SI{9.07}{kg}$ is the mass of the pressure vessel. As the scintillation yield was determined for all temperatures between $\SI{-50}{\celsius}$ and $\SI{-15}{\celsius}$ in $\SI{1}{\celsius}$ steps, the rate can be calculated at these same temperatures by linear interpolation. Therefore, the rate $R(T)$ at the temperature $T$, when $T_i>T>T_{i-1}$, is given by
+\begin{equation}
+    R(T) = R(T_{i-1})+ (T-T_{i-1})\times \frac{R(T_i)-R(T_{i-1})}{T_i-T_{i-1}}.
+\end{equation}
+This rate can be furthermore separated between correlated and uncorrelated noise by constructing the $\Delta t$ distribution for every $T_i$ and fitting the Poissonian peak with equation \ref{eq:PDFlog}. The percentage of uncorrelated noise can be then calculated by integrating this fit and dividing it by the total number of counts of the distribution. The results of this approach are shown in figure \ref{fig:ratesDOM}. Here is also depicted the rate from the HitSpool data, where each point represents the average rate of 12 DOM layers from 78 strings \cite{Aartsen_2017}. 
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[scale=1.0]{Figures/simulation/RatesDOM-Corr.pdf}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.49\textwidth}
+      \includegraphics[scale=1.0]{Figures/simulation/RatesDOM-UCorr.pdf}
+  \end{minipage}
+  \caption{Temperature dependence of the background rate caused by radioative decays inside the glass of the DOM, simulated using the two set of isotope activities BAS-1 (blue) and BAS-2 (yellow). For comparison is also depicted the DOM background rate calculated with the HitSpool data (taken from \cite{Aartsen_2017}). The latter also includes the dark rate of the PMT. \textbf{Left:} rate of the correlated and \textbf{right:} of the uncorrelated noise. }
+  \label{fig:ratesDOM}
+\end{figure}
+ \par The simulated temperature dependence shown by the correlated part of the background (left side of figure \ref{fig:ratesDOM}) is in good agreement with the experimental data. This behaviour is a direct result of the dependency shown by the scintillation yield of the glass. However, the absolute values of the rate does not coincide with each other, as the set of isotope activities BAS-2 result in a higher, while the one of BAS-1 in a lower rate compared to the HitSpool data. Since in this thesis the amount of radioactivity of only two Benthos samples was measured, it is not known how much the activities vary between the pressure vessel of different DOMs. As the experimental data is the average of several modules, it could be asserted that the mean isotope activity lies inbetween the sets measured in this work, assuming that every scintillation parameter is correct. Anyway, the correlated rate of the HitSpool data also includes the afterpulsing of the PMT, thus the rate steming from radioactive decays is a bit lower than the one shown in figure \ref{fig:ratesDOM}.
+\par The analysis of the uncorrelated part, shown in the right side of figure \ref{fig:ratesDOM} is more complex, as most of the dark rate of the PMT contributes to the Poissonian noise. The influence of the PMT can be clearly seen, as the rate starts to increase with higher temperatures at around $\SI{-20}{\celsius}$ due to the thermionic emission. However, the PMT dark rate is not known with great precision, as the measurements done with bare PMTs can not completly reproduce the optical coupling inside the DOM. In \cite{Abbasi:2010vc}, the PMT dark rate was determined to be close to $\SI{300}{s^{-1}}$ in the $\SI{-40}{\celsius}$ to $\SI{-20}{\celsius}$ range. In this measurement an artificial dead time of $\SI{6}{\mu s}$ was added, which supressed around the half of all afterpulses. If the PMT dark rate in the DOMs is of the same order, then the uncorrelated part of the HitSpool data would be mostly exclusibly caused by the PMT. This would mean that there is a big overestimation done in the simulations of this thesis. In order to maintain the values of the corralated rate of the background caused by radioactive decays and reduce its uncorrelated contribution, the yield of the glass would have to be larger (see right side of figure \ref{fig:yieldAdependency}), and thus also the isotope activity inside the glass would have to be lower. This shows the requirment of more statistic for both, the scintillation parameters and the amount of radioactivity expected to be found in the glass, if the origin of the different parts of the background are to be determined.
+
+
+
+
+
+\section{mDOM}
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[scale=1.0]{Figures/simulation/CPS-mdom.pdf}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.49\textwidth}
+      \includegraphics[scale=1.0]{Figures/simulation/CPS-mdom-averagePMT.pdf}
+  \end{minipage}
+  \caption{Simulated time between subsequent hits in log$_{10}$($\Delta t$) for an mDOM in ice at $\SI{-35}{\celsius}$. \textbf{Left:} the distribution combining all hits of the module, \textbf{right:} the average distribution only considering the hits of single PMTs. Two set of isotope activites labeled as VAS-1 and VAS-2 were used (see text). }
+  \label{fig:mDOMdt}
+\end{figure}
+In chapter \ref{ch:GammaSpectroscopy} the amount of radioactivity in four Vitrovex samples was determined. Three of them exhibited similar activities (see table \ref{table:actCanada} and \ref{tab:actMue}), as they were from the same production batch. In this section the average of these three results will be used and refered as ``VAS-1''. The results for the Vitrovex half vessel (see table \ref{tab:actMue}) as ``VAS-2''. With this information and the scintillation parameters of the Vitrovex glass measured in chapter \ref{ch:scintParameters}, the $\Delta t$ of the mDOM can be simulated as already done in the last section. As the mDOM features 24 PMTs the background can be referred for the whole module or for single PMTs. Figure \ref{fig:mDOMdt} shows the noise time distribution for both cases. The two isotope activity sets yield almost the same results, with the most noticeable deviation at very short time differences. This is due to the big contrast of $\ch{^{40}K}$ activity with VAS-1 featuring $\SI{61\pm0.9}{\frac{Bq}{kg}}$ and  $\SI{0\pm 1}{\frac{Bq}{kg}}$ for VAS-2, reducing the amount of Cherenkov light detected in the latter. However, as already mentioned, this difference could not be measured experimentally, as the pulse length (FWHM) of the PMTs is $\sim \SI{5}{ns}$, merging allmost all Cherenkov photons in one pulse of several PE. 
+\begin{wrapfigure}{O}{0pt}
+\centering
+\includegraphics[scale=1.0]{Figures/simulation/mDOMaxis.pdf}
+\caption{Frame of reference used in this section.}
+\label{fig:frameofereference}
+\end{wrapfigure}
+A novel feature offered by the mDOM design is the possibility of using coincidences between different PMT in the data analysis. For this it will be important to set trigger conditions (either online in the DAQ or in the reconstruction algorithms) that suppress most of the coincidences caused by the background. In this framework, the time distribution for coincidences was investigated. 
+\par Since the output of the simulation entails the PMT number for every hit, the coincidences between PMTs can be analysed from the same data. For this, the data set from the simulation of VAS-1 shown in figure \ref{fig:mDOMdt} is used. First, the most basic investigation is to separate the $\Delta t$ distribution from subsequent hits detected in the same PMT and the ones that where measured in different ones. The results are shown in the top left side of figure \ref{fig:mDOM-diffPMTs}. Here, the shortest $\Delta t$ are measured at the same PMTs, while most of the uncorrelated noise is measured at different sensors. This is to be expected, since the radioactive decays are localised in a single point of the glass volume. Therefore, the detection of photons will occur most probably at the nearest PMT from the decay. On the other side, the Poissonian peak is caused by the $\Delta t$ from the last and first detected photon from different radioactive decays. Since these decays take place at different locations, the uncorrelated part is mostly measured by different sensors.
+
+\begin{figure}[t]
   \centering
   \begin{minipage}[b]{0.49\textwidth}
     \includegraphics[scale=1.0]{Figures/simulation/dT-mDOM-PMTS.pdf}
@@ -11,6 +184,46 @@
   \end{minipage}
   \centering
   \includegraphics[scale=1.0]{Figures/simulation/dT-Phi.pdf}
-  \caption{default}
-  \label{fig:dtmdOM}
+  \caption{Time between subsequent hits considering different PMT pairs. \textbf{Top left:} comparison of coincidence rate with the same PMT (blue) and different PMT (yellow).  \textbf{Top right:} coincidence rate separating the PMT regarding their $\vartheta$ angle difference, \textbf{bottom} regarding their $\varphi$ angle difference.}
+  \label{fig:mDOM-diffPMTs}
+\end{figure}
+
+
+\par In the plot at the top right side of figure \ref{fig:mDOM-diffPMTs} the distribution regarding the $\Delta \vartheta$ from the positions of the hit PMTs (see figure \ref{fig:frameofereference}). As in the mDOM design there are four rings of sensors symmetrically positioned along the $z$-axis, there are five different possible $\Delta \vartheta$ values. The curve for the case of $\Delta \vartheta = 0^\circ$ exhibits the highest counts for correlated background, as this includes the $\Delta t$ from hits in the same PMT. As expected, the probability for coincidences from the scintillation noise decreases the further away the PMT pairs are, while the intensity of the uncorrelated peak does not depend on the PMT location, excepting for the case $\Delta \vartheta = 114^\circ$. Only PMTs on the rings at the extremes of the mDOM contribute to this angle difference. Since these rings have only four PMTs each, while the rings from the mid section have eight, the rate of uncorrelated coincidences is smaller. The same analysis can be done separating the $\Delta t$ distributions regarding the $\Delta \varphi$ distance between PMTs, as depicted in the lower part of figure \ref{fig:mDOM-diffPMTs}. Here similar conclusions can be drawn as in the case of the $\Delta \vartheta$ separation, exhibiting a higher rate of coincidences in the correlated part of the distribution the smaller the angle difference $\Delta \varphi$. The only exception is the distribution for$\Delta \varphi = 135^\circ$, which features the lowest rate. This can be explained with the same reasoning as before, since only PMTs at the outer ring contribute to this distribution.
+
+\begin{figure}[t]
+  \centering
+  \begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[scale=1.0]{Figures/simulation/RatesmDOM-VAS1-Simu.pdf}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[scale=1.0]{Figures/simulation/RatesmDOM-VAS2-Simu.pdf}
+  \end{minipage}
+  \caption{Time between subsequent hits considering different PMT pairs. \textbf{Top left:} comparison of coincidence rate with the same PMT (blue) and different PMT (yellow).  \textbf{Top right:} coincidence rate separating the PMT regarding their $\vartheta$ angle difference, \textbf{bottom} regarding their $\varphi$ angle difference.}
+  \label{fig:mDOM-diffPMTs}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+
+    \includegraphics[scale=1.0]{Figures/simulation/electronfactor.pdf}
+
+  \caption{Time between subsequent hits considering different PMT pairs. \textbf{Top left:} comparison of coincidence rate with the same PMT (blue) and different PMT (yellow).  \textbf{Top right:} coincidence rate separating the PMT regarding their $\vartheta$ angle difference, \textbf{bottom} regarding their $\varphi$ angle difference.}
+  \label{fig:mDOM-diffPMTs}
+\end{figure}
+
+
+
+\begin{figure}[t]
+  \centering
+  \begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[scale=1.0]{Figures/simulation/GEL-DOM.pdf}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.49\textwidth}
+    \includegraphics[scale=1.0]{Figures/simulation/GEL-mDOM.pdf}
+  \end{minipage}
+  \caption{swag}
+  \label{fig:GEL-influence}
 \end{figure}

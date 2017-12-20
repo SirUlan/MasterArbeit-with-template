@@ -1,7 +1,8 @@
-\chapter{Characterisation of the PMT}
+\chapter{Characterisation of PMTs}
 To accurately simulate and calculate the scintillation properties, it is necessary to fully know the response of the detectors. This chapter presents the quantum efficiency, gain and TTS of the PMT used in this work. 
 \section{Gain and TTS}
 
+\subsection{Setup}
 \begin{SCfigure}
     \centering
     \includegraphics[scale=1.0]{Figures/PMTChar/Gain_setup08.pdf}
@@ -29,7 +30,7 @@ For the determination of the gain, the measured charge is arranged into a histog
 \par In concordance with other measurements with this PMT model \cite[103]{LEW}, the gain grows with lower temperatures, reaching at $\SI{-50}{^\circ C}$ an increase of $\sim\SI{22}{\percent}$ compared with respect to the measurement at $\SI{20}{^\circ C}$. The reason for this behaviour is not known to date, although a rise on the secondary emission with lower temperatures has been observed with different electrode materials \cite{Singh_1987}, which may imply an increase of the dynode's work function with the temperature. 
 \par The increase of the mean charge of one-phe pulses with decreasing temperatures has as a consequence that the number of undetected SPE events due to a constant amplitude trigger (as in the case of the PMT rate measurements) will also be temperature dependent. This effect is explained and quantified in the next section.
 
-\subsubsection{Photoelectron loss due to trigger}
+\subsubsection*{Photoelectron loss due to trigger}
 \label{sec:PHEloss}
 
 \begin{figure}[H]
@@ -181,3 +182,5 @@ where  $QE(\lambda)$ is the quantum efficiency for the wavelength $\lambda$, $I(
 \end{wrapfigure}
 As introduced in section \ref{sec:photonhandlingG4}, the Geant4 simulation used in this thesis can form waveforms given a curve that represents a single photoelectron pulse. Therefore the average SPE from the PMT in this setup is needed. For this, the PMT dark rate pulses are measured at room temperature, considering only the signals with a charge in the interval $Q_1\pm \sigma_1$, where $Q_1$ is the mean charge of the SPE and $\sigma_1$ its standard deviation obtained from the calibration. In order to match the positioning of the pulses, each one is shifted so that its minimum lies in $t=0$. The result of averaging $\sim 3700$ of such pulses is illustrated in figure \ref{fig:SPEamp}. Noteworthy are the reflections, which are probably produce by the coupling between the cables and the amplifier, as this SPE can be compared with the pulse shown in figure \ref{fig:waveforms}, which was made from this same setup and PMT, but without the amplifier.
 \par As the gain change with temperature, also the SPE minima will vary. This is however not considered in the simulation and only the SPE at room temperature is used. Nevertheless, this should be still a good approximation for the purposes of this thesis, as the waveforms are simulated just for reasons of time resolution. 
+
+\section{Summary}

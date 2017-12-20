@@ -44,9 +44,9 @@ chapterinoneline, % Uncomment to place the chapter title next to the number on o
 
  % Use the Palatino font by default
 
-\usepackage[backend=bibtex, sorting = none]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
+%\usepackage[backend=bibtex, sorting = none, style = myelsart-num_ext]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
 
-\addbibresource{example.bib} % The filename of the bibliography
+%\addbibresource{example.bib} % The filename of the bibliography
 
 \usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
 \usepackage{float}
@@ -88,7 +88,7 @@ chapterinoneline, % Uncomment to place the chapter title next to the number on o
 %	THESIS INFORMATION
 %----------------------------------------------------------------------------------------
 
-\thesistitle{Studies on dark rates induced by\\ radioactive decays in the digital optical module for IceCube-Gen2} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
+\thesistitle{Studies on dark rates induced by radioactive decays of the multi-PMT digital optical module for future IceCube extensions} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
 \supervisor{Prof. Dr. Alexander Kappes} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
 \examiner{Dr. Carlos Guerrero Sánchez} % Your examiner's name, this is not currently used anywhere in the template, print it elsewhere with \examname
 
@@ -197,7 +197,7 @@ chapterinoneline, % Uncomment to place the chapter title next to the number on o
  
 \vfill
 
-{\large Münster, November 12017 HE}\\[0cm] % Date
+{\large Münster, December 2017}\\[0cm] % Date
 %\includegraphics{Logo} % University/department logo - uncomment to place it
  
 \vfill
@@ -210,22 +210,24 @@ chapterinoneline, % Uncomment to place the chapter title next to the number on o
 
 \begin{declaration}
 \addchaptertocentry{\authorshipname} % Add the declaration to the table of contents
-\noindent I, \authorname, declare that this thesis titled, \enquote{\ttitle} and the work presented in it are my own. I confirm that:
+\noindent
+I hereby confirm that this thesis on \enquote{\ttitle} is solely my own work and that I have used no sources or aids other than the ones stated. All passages in my thesis for which other sources, including electronic media, have been used, be it direct quotes or content references, have been acknowledged as such and the sources cited. \\
+\vspace{30pt}
 
-\begin{itemize} 
-\item This work was done wholly or mainly while in candidature for a research degree at this University.
-\item Where any part of this thesis has previously been submitted for a degree or any other qualification at this University or any other institution, this has been clearly stated.
-\item Where I have consulted the published work of others, this is always clearly attributed.
-\item Where I have quoted from the work of others, the source is always given. With the exception of such quotations, this thesis is entirely my own work.
-\item I have acknowledged all main sources of help.
-\item Where the thesis is based on work done by myself jointly with others, I have made clear exactly what was done by others and what I have contributed myself.\\
-\end{itemize}
  
-\noindent Signed:\\
-\rule[0.5em]{25em}{0.5pt} % This prints a line for the signature
- 
-\noindent Date:\\
-\rule[0.5em]{25em}{0.5pt} % This prints a line to write the date
+\begin{flushright}
+\rule[0.5em]{25em}{0.5pt}\\ % This prints a line to write the date
+
+
+\end{flushright}
+\vspace{10pt}
+
+I agree to have my thesis checked in order to rule out potential similarities with other works and to have my thesis stored in a database for this purpose.\\
+\vspace{30pt}
+\begin{flushright}
+\rule[0.5em]{25em}{0.5pt}\\ % This prints a line to write the date
+
+\end{flushright}
 \end{declaration}
 
 \cleardoublepage
@@ -340,11 +342,11 @@ chapterinoneline, % Uncomment to place the chapter title next to the number on o
 
 
 
-
-\include{Chapters/Theory/theoryall}
-\include{Chapters/Experimental/cIScintillation}
-
-
+%\include{Chapters/Introduction}
+%\include{Chapters/Theory/theoryall}
+%\include{Chapters/Experimental/cIScintillation}
+\include{Chapters/simulation/modules} 
+%\include{Chapters/Conclusion}
 %----------------------------------------------------------------------------------------
 %	THESIS CONTENT - APPENDICES
 %----------------------------------------------------------------------------------------
@@ -361,12 +363,13 @@ chapterinoneline, % Uncomment to place the chapter title next to the number on o
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------
-\nocite{*}
-%\bibliographystyle{alpha}
+%\nocite{*}
+%\bibliographystyle{myelsart-num_ext}
+\bibliographystyle{elsart}
 % Befehl ist an der Stelle zu verwenden, an der das Literaturverzeichnis gesetzt werden soll
-%\bibliography{example.bib}
+\bibliography{example.bib}
 
-\printbibliography
+%\printbibliography
 
 %----------------------------------------------------------------------------------------
 
