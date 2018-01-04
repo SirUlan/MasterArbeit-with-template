@@ -44,7 +44,7 @@ chapterinoneline, % Uncomment to place the chapter title next to the number on o
 
  % Use the Palatino font by default
 
-%\usepackage[backend=bibtex, sorting = none, style = myelsart-num_ext]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
+%\usepackage[backend=bibtex, sorting = none]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
 
 %\addbibresource{example.bib} % The filename of the bibliography
 
@@ -69,6 +69,10 @@ chapterinoneline, % Uncomment to place the chapter title next to the number on o
                     \secdef\@chapter\@schapter}
 \makeatother
 
+
+\makeatletter
+\renewcommand\@cite[2]{[{#1\if@tempswa\ (#2)\fi}]}
+\makeatother
 
 %----------------------------------------------------------------------------------------
 %	MARGIN SETTINGS
@@ -119,9 +123,9 @@ chapterinoneline, % Uncomment to place the chapter title next to the number on o
 
 
 
-\makeatletter
-\newcommand\thefontsize[1]{{#1 The current font size is: \f@size pt\par}}
-\makeatother
+%\makeatletter
+%\newcommand\thefontsize[1]{{#1 The current font size is: \f@size pt\par}}
+%\makeatother
 
 
 
@@ -216,7 +220,7 @@ I hereby confirm that this thesis on \enquote{\ttitle} is solely my own work and
 
  
 \begin{flushright}
-\rule[0.5em]{25em}{0.5pt}\\ % This prints a line to write the date
+Münster, 28 December 2017 \hspace{0.5cm} \makebox[2.5in]{\hrulefill} \\ % This prints a line to write the date
 
 
 \end{flushright}
@@ -225,7 +229,7 @@ I hereby confirm that this thesis on \enquote{\ttitle} is solely my own work and
 I agree to have my thesis checked in order to rule out potential similarities with other works and to have my thesis stored in a database for this purpose.\\
 \vspace{30pt}
 \begin{flushright}
-\rule[0.5em]{25em}{0.5pt}\\ % This prints a line to write the date
+Münster, 28 December 2017 \hspace{0.5cm} \makebox[2.5in]{\hrulefill}\\ % This prints a line to write the date
 
 \end{flushright}
 \end{declaration}
@@ -240,7 +244,7 @@ I agree to have my thesis checked in order to rule out potential similarities wi
 
 \noindent\enquote{\itshape Every thesis should have a quote...}\bigbreak
 
-\hfill Rafaella Busse
+\hfill Raffaela Solveig Busse
 
 %----------------------------------------------------------------------------------------
 %	ABSTRACT PAGE
@@ -342,11 +346,11 @@ I agree to have my thesis checked in order to rule out potential similarities wi
 
 
 
-%\include{Chapters/Introduction}
-%\include{Chapters/Theory/theoryall}
-%\include{Chapters/Experimental/cIScintillation}
+\include{Chapters/Introduction}
+\include{Chapters/Theory/theoryall}
+\include{Chapters/Experimental/cIScintillation}
 \include{Chapters/simulation/modules} 
-%\include{Chapters/Conclusion}
+\include{Chapters/Conclusion}
 %----------------------------------------------------------------------------------------
 %	THESIS CONTENT - APPENDICES
 %----------------------------------------------------------------------------------------
@@ -357,7 +361,7 @@ I agree to have my thesis checked in order to rule out potential similarities wi
 % Uncomment the lines as you write the Appendices
 
 
-%%\include{Appendices/gammaspectroscopy}
+\include{Appendices/gammaspectroscopy}
 
 
 %----------------------------------------------------------------------------------------
@@ -366,11 +370,38 @@ I agree to have my thesis checked in order to rule out potential similarities wi
 %\nocite{*}
 %\bibliographystyle{myelsart-num_ext}
 \bibliographystyle{elsart}
+%\bibliographystyle{cris}
 % Befehl ist an der Stelle zu verwenden, an der das Literaturverzeichnis gesetzt werden soll
 \bibliography{example.bib}
 
 %\printbibliography
 
+
+\begin{acknowledgements}
+ % Add the acknowledgements to the table of contents
+%The acknowledgments and the people to thank go here, don't forget to include your project advisor\ldots
+\vspace*{\fill} 
+\addchaptertocentry{\acknowledgementname}
+\begin{quote} 
+\begin{center}{\huge\acknowledgementname \\ - \textit{Agradecimientos -}\par}\end{center}
+\vspace{70pt}
+First, I want to thank my advisor Prof. Alexander Kappes for giving me the opportunity to work in this amazing group and the possibility to do research on a very exciting topic. Thank you for the constant support, advice and infinite patience. 
+\par I would also like to thank my second supervisor, Dr Carlos Guerrero Sánchez, who has kindly offered me his support despite the distance.
+\par I am immensely grateful to Lew Classen, who taught me everything. Also, thank you and Cristian Lozano for proofreading most of this thesis. You both have always had an open ear for my \footnotesize{ - most of the time rather dumb -} \normalsize questions.
+\par There are many people that helped me in the course of the last year. I would like to express my deepest gratitude to Prof. Alfons Khoukaz, Prof. Dieter Frekers, Volker Hannen, Oleg Kalekin, Pawel Mekarski, Anna Pollmann, Daniel Winzen and Michael Larson.  
+\par Furthermore, I want to thank all the working group\footnote{...everyone is so nice...}. You are truly awesome people, in spite of the fact that you are bad at Poker… and you still beat me. 
+\\  \hfill
+\par Por último, pero no menos importante, quiero agradecer infinitamente a mi familia. A mis padres, Ana María y Bernhard, por su constante apoyo durante mis estudios. Siempre han sido un pilar fundamental en mi vida. También quiero dar gracias a Ani Cabello Zanahoria Lechuga Tomate, mi tío Martín y a Pilar, quienes a pesar de la lejanía siempre han estado a mi lado.\\
+
+\begin{flushright}
+...und ich danke Franz Unland für die ganzen Pizzen.
+\end{flushright}
+
+\end{quote}
+\vspace*{\fill}
+
+
+\end{acknowledgements}
 %----------------------------------------------------------------------------------------
 
 \end{document}  

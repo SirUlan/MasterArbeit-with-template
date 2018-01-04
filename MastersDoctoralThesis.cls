@@ -449,7 +449,7 @@ KOMA-script documentation for details.}]{fancyhdr}
 \usepackage{xcolor}
 \colorlet{mdtRed}{red!50!black}
 \newcommand{\acknowledgementname}{Acknowledgements}
-\providecaptionname{american,australian,british,canadian,english,newzealand,UKenglish,USenglish} {\acknowledgementname}{Acknowledgements} % Acknowledgement text for English countries
+\providecaptionname{american,australian,british,canadian,english,newzealand,UKenglish,USenglish} {\acknowledgementname}{Acknowledgements } % Acknowledgement text for English countries
 \providecaptionname{german,ngerman,austrian,naustrian}{\acknowledgementname}{Danksagung} % Acknowledgement text for Germanic countries
 
 \ifbool{consistentlayout}{
@@ -462,8 +462,9 @@ KOMA-script documentation for details.}]{fancyhdr}
 	\DeclareDocumentEnvironment{acknowledgements}{}{%
 		\checktoopen
 		\tttypeout{\acknowledgementname}
+		
 		\thispagestyle{plain}
-		\begin{center}{\huge\textit{\acknowledgementname}\par}\end{center}
+		%\begin{center}{\huge\acknowledgementname - \textit{Agradecimientos -}\par}\end{center}
 	}
 	{
 		\vfil\vfil\null
